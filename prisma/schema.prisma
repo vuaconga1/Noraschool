@@ -1,0 +1,326 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String?   @unique
+  username     String?   @unique
+  passwordHash String?
+  phone        String?
+  address      String?
+  dob          DateTime? @db.Date
+  image        String?
+  legacyRole   Int       @default(0) @map("legacy_role")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  roles   Role[]        @relation("UserRoles")
+  members ClassMember[]
+
+  @@index([username])
+  @@map("users")
+}
+
+model Role {
+  id         String       @id @default(cuid())
+  name       String       @unique
+  isDisabled Boolean      @default(false)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  users      User[]       @relation("UserRoles")
+  permissions Permission[] @relation("RolePermissions")
+
+  @@map("roles")
+}
+
+model Permission {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  roles     Role[]   @relation("RolePermissions")
+
+  @@map("permissions")
+}
+
+model Student {
+  id        String   @id @default(cuid())
+  playerId  String   @unique @map("player_id") @db.VarChar(50)
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  scores         GameScore[]
+  monthlyScores  MonthlyGameScore[]
+  progress       GameProgress[]
+
+  @@map("students")
+}
+
+model Classroom {
+  id          String   @id @default(cuid())
+  code        String?  @unique @db.VarChar(40)
+  name        String   @db.VarChar(200)
+  description String?
+  source      String   @default("manual") @db.VarChar(20)
+  createdById String?  @map("created_by")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  members     ClassMember[]
+  assignments ClassAssignment[]
+
+  @@index([code])
+  @@map("classes")
+}
+
+model ClassMember {
+  id        String   @id @default(cuid())
+  classId   String   @map("class_id")
+  userId    String   @map("user_id")
+  addedAt   DateTime @default(now()) @map("added_at")
+
+  classroom Classroom @relation(fields: [classId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([classId, userId])
+  @@index([userId])
+  @@map("class_members")
+}
+
+model ClassAssignment {
+  id          String   @id @default(cuid())
+  classId     String   @map("class_id")
+  bookType    String   @map("book_type") @db.VarChar(40)
+  unitSlug    String   @map("unit_slug") @db.VarChar(80)
+  partId      String   @map("part_id") @db.VarChar(40)
+  gameTypes   String[] @map("game_types")
+  bookName    String   @map("book_name") @db.VarChar(120)
+  unitName    String   @map("unit_name") @db.VarChar(200)
+  partTitle   String?  @map("part_title") @db.VarChar(200)
+  deadlineAt  DateTime @map("deadline_at")
+  createdById String?  @map("created_by")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  classroom Classroom @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  @@index([classId, deadlineAt])
+  @@map("class_assignments")
+}
+
+model ClassAuditLog {
+  id           String   @id @default(cuid())
+  action       String   @db.VarChar(40)
+  actorId      String?  @map("actor_id")
+  actorName    String?  @map("actor_name") @db.VarChar(200)
+  classId      String?  @map("class_id")
+  assignmentId String?  @map("assignment_id")
+  detail       Json?
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@index([classId, createdAt])
+  @@map("class_audit_logs")
+}
+
+model GameUnit {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String
+  unit             String
+  bookname         String
+  backgroundColor  String?
+  flashcards       Json
+  wordOrdering     Json?
+  wordScramble     Json?
+  parts            Json?
+  enabledGames     String[]
+  bookType         String   @default("kids") @map("book_type")
+  useRotatingGame  Boolean? @map("use_rotating_game")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([bookType])
+  @@map("game_units")
+}
+
+model GameScore {
+  id        String   @id @default(cuid())
+  gameKey   String   @map("game_key") @db.VarChar(160)
+  unitSlug  String   @map("unit_slug") @db.VarChar(80)
+  partId    String   @map("part_id") @db.VarChar(40)
+  gameType  String   @map("game_type") @db.VarChar(40)
+  bestScore Int      @default(0) @map("best_score")
+  studentId String   @map("student_id")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([gameKey, studentId])
+  @@index([studentId])
+  @@map("game_scores")
+}
+
+model MonthlyGameScore {
+  id        String   @id @default(cuid())
+  bookType  String   @map("book_type") @db.VarChar(40)
+  year      Int
+  month     Int
+  gameKey   String   @map("game_key") @db.VarChar(160)
+  unitSlug  String   @map("unit_slug") @db.VarChar(80)
+  partId    String   @map("part_id") @db.VarChar(40)
+  gameType  String   @map("game_type") @db.VarChar(40)
+  bestScore Int      @default(0) @map("best_score")
+  studentId String   @map("student_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, gameKey, year, month])
+  @@index([bookType, year, month])
+  @@map("monthly_game_scores")
+}
+
+model GameProgress {
+  id        String   @id @default(cuid())
+  playerId  String   @map("player_id") @db.VarChar(50)
+  unitSlug  String   @map("unit_slug") @db.VarChar(80)
+  partId    String   @default("default") @map("part_id") @db.VarChar(40)
+  bookname  String   @db.VarChar(120)
+  progress  Json     @default("{}")
+  studentId String?  @map("student_id")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student Student? @relation(fields: [studentId], references: [id], onDelete: SetNull)
+
+  @@unique([playerId, unitSlug, partId])
+  @@index([studentId])
+  @@map("game_progress")
+}
+
+model GameAttempt {
+  id        String   @id @default(cuid())
+  playerId  String   @map("player_id") @db.VarChar(50)
+  studentId String?  @map("student_id")
+  unitSlug  String   @map("unit_slug") @db.VarChar(80)
+  partId    String   @map("part_id") @db.VarChar(40)
+  gameType  String   @map("game_type") @db.VarChar(40)
+  bookType  String   @map("book_type") @db.VarChar(40)
+  score     Int
+  maxScore  Int?     @map("max_score")
+  itemCount Int?     @map("item_count")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([studentId, createdAt])
+  @@index([unitSlug, partId, gameType])
+  @@map("game_attempts")
+}
+
+model CurriculumMonth {
+  id        String   @id @default(cuid())
+  monthDate DateTime @map("month_date") @db.Date
+  titleVi   String   @map("title_vi")
+  titleEn   String   @map("title_en")
+  notes     String?
+  topicPlan String?  @map("topic_plan")
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  weeks CurriculumWeek[]
+
+  @@unique([monthDate])
+  @@map("curriculum_months")
+}
+
+model CurriculumWeek {
+  id        String   @id @default(cuid())
+  monthId   String   @map("month_id")
+  weekIndex Int      @map("week_index")
+  label     String?
+  isReview  Boolean  @default(false) @map("is_review")
+  rawText   String?  @map("raw_text")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  month CurriculumMonth      @relation(fields: [monthId], references: [id], onDelete: Cascade)
+  words CurriculumWeekWord[]
+
+  @@unique([monthId, weekIndex])
+  @@index([monthId])
+  @@map("curriculum_weeks")
+}
+
+model VocabItem {
+  id           String   @id @default(cuid())
+  word         String
+  normalized   String   @unique
+  meaning      String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  weeks  CurriculumWeekWord[]
+  assets VocabAsset?
+
+  @@index([word])
+  @@map("vocab_items")
+}
+
+model CurriculumWeekWord {
+  id          String @id @default(cuid())
+  weekId      String @map("week_id")
+  vocabItemId String @map("vocab_item_id")
+  sortOrder   Int    @default(0) @map("sort_order")
+
+  week      CurriculumWeek @relation(fields: [weekId], references: [id], onDelete: Cascade)
+  vocabItem VocabItem      @relation(fields: [vocabItemId], references: [id], onDelete: Cascade)
+
+  @@unique([weekId, vocabItemId])
+  @@index([weekId])
+  @@map("curriculum_week_words")
+}
+
+model VocabAsset {
+  id          String   @id @default(cuid())
+  vocabItemId String   @unique @map("vocab_item_id")
+  imagePath   String?  @map("image_path")
+  audioPath   String?  @map("audio_path")
+  matchedAt   DateTime @default(now()) @map("matched_at")
+
+  vocabItem VocabItem @relation(fields: [vocabItemId], references: [id], onDelete: Cascade)
+
+  @@map("vocab_assets")
+}
+
+/// Legacy game-book vocabulary rows (management CRUD)
+model VocabularyItem {
+  id           String   @id @default(cuid())
+  bookType     String   @map("book_type")
+  gameSlug     String   @map("game_slug")
+  unit         String
+  unitTitle    String   @map("unit_title")
+  sectionId    String?  @map("section_id")
+  sectionTitle String?  @map("section_title")
+  wordId       String   @map("word_id")
+  word         String
+  emoji        String?
+  meaning      String?
+  link         String?
+  audioUrl     String?  @map("audio_url")
+  sortOrder    Int      @default(0) @map("sort_order")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([bookType, gameSlug, wordId])
+  @@index([bookType])
+  @@index([gameSlug])
+  @@map("vocabulary_items")
+}

@@ -1,0 +1,74 @@
+Excel: 0. CHỦ ĐỀ x GIÁO VIÊN (1).xlsx
+Sheet: CHỦ ĐỀ 2026-2027
+Unique words: 270
+Complete (image+audio): 209
+Missing image: 60
+Missing audio: 60
+Missing both: 59
+
+=== MISSING BOTH ===
+air
+angle
+ao dai
+bamboo
+barbecue
+be quiet
+ben thanh market
+black cat
+boomerang
+city
+conical hat
+cowboy
+custard apple
+daughter
+driver
+fist bump
+go straight
+granddaughter
+grandson
+ha noi
+hello
+helmet
+high five
+hot chocolate
+husband
+listen
+listen to your teacher
+look
+look at the teacher
+meat pie
+mid-autumn day
+no fighting
+no running
+palace
+parents
+pho
+pirate
+pumkin
+pyramid
+raise your hand
+seed
+sidewalk
+sit nicely
+sled
+snow
+snowflake
+son
+statue
+stop
+superhero
+sydney opera house chỉ dành cho level
+teeth
+temple
+tet holiday papaya
+turn left
+turn right
+vegemite
+wait
+wife
+
+=== MISSING IMAGE ONLY ===
+sand castle
+
+=== MISSING AUDIO ONLY ===
+rocket

@@ -1,0 +1,41 @@
+import "next-auth";
+import "next-auth/jwt";
+import type { Role } from "@/types/role";
+
+declare module "next-auth" {
+  interface Session {
+    access_token?: string;
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      username?: string | null;
+      image?: string | null;
+      roles: Role[];
+    };
+    error?: "RefreshAccessTokenError";
+  }
+
+  interface User {
+    id: string;
+    name: string;
+    email: string;
+    username?: string | null;
+    image?: string | null;
+    roles: Role[];
+    access_token: string;
+    refresh_token: string;
+    expires_in: number;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    access_token?: string;
+    refresh_token?: string;
+    accessTokenExpires?: number;
+    roles?: Role[];
+    username?: string | null;
+    error?: "RefreshAccessTokenError";
+  }
+}

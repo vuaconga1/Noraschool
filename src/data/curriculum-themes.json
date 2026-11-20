@@ -1,0 +1,935 @@
+[
+  {
+    "slug": "2026-09",
+    "year": 2026,
+    "month": 9,
+    "titleVi": "Khai giảng năm học mới",
+    "titleEn": "New Schoolyear",
+    "topicPlan": "Classroom rules +school things\nreview school things+ mid autumn",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "hello, be quiet, high five, sit nicely, raise your hand, ",
+        "isReview": false,
+        "words": [
+          "hello",
+          "be quiet",
+          "high five",
+          "sit nicely",
+          "raise your hand",
+          "fist bump",
+          "listen to your teacher",
+          "look at the teacher",
+          "no fighting",
+          "no running"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": " pencil⁠, ⁠crayon⁠, ⁠bag⁠, ⁠book⁠, ⁠paper⁠, ⁠table⁠, ⁠chair⁠, ⁠picture⁠, glue, s",
+        "isReview": false,
+        "words": [
+          "pencil",
+          "crayon",
+          "bag",
+          "book",
+          "paper",
+          "table",
+          "chair",
+          "picture",
+          "glue",
+          "scissors"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "Review:  pencil⁠, ⁠crayon⁠, ⁠bag⁠, ⁠book⁠, ⁠paper⁠, ⁠table⁠, ⁠chair⁠, ",
+        "isReview": true,
+        "words": [
+          "pencil",
+          "crayon",
+          "bag",
+          "book",
+          "paper",
+          "table",
+          "chair",
+          "picture",
+          "glue",
+          "scissors"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "Mid Atumn: mooncake, tea, rabbit,",
+        "isReview": false,
+        "words": [
+          "mooncake",
+          "tea",
+          "rabbit",
+          "star",
+          "moon",
+          "lantern",
+          "banyan tree",
+          "mid-autumn day",
+          "dragon dance",
+          "drum"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "2026-10",
+    "year": 2026,
+    "month": 10,
+    "titleVi": "Khám phá bản thân",
+    "titleEn": "Self-discovery",
+    "topicPlan": "2 weeks: body part\n2 weeks: inside us + halloween",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "5 senses: eyes, ears, mouth, nose, see, hear, taste, ",
+        "isReview": false,
+        "words": [
+          "eyes",
+          "ears",
+          "mouth",
+          "nose",
+          "see",
+          "hear",
+          "taste",
+          "smell",
+          "skin",
+          "touch"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": "shoulders, knees, head, toes, fingers, ",
+        "isReview": false,
+        "words": [
+          "shoulders",
+          "knees",
+          "head",
+          "toes",
+          "fingers",
+          "hands",
+          "arms",
+          "legs",
+          "foot",
+          "face"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "brain, heart, lungs, stomach, neck,  teeth, bones, hair",
+        "isReview": false,
+        "words": [
+          "brain",
+          "heart",
+          "lungs",
+          "stomach",
+          "neck",
+          "teeth",
+          "bones",
+          "hair"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "Halloween: angle, pirate, monster, superhero, ",
+        "isReview": false,
+        "words": [
+          "angle",
+          "pirate",
+          "monster",
+          "superhero",
+          "cowboy",
+          "pumkin",
+          "candy",
+          "bat",
+          "black cat"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "2026-11",
+    "year": 2026,
+    "month": 11,
+    "titleVi": "Nghề nghiệp",
+    "titleEn": "Career",
+    "topicPlan": "2 weeks: jobs part 1\n2 weeks: jobs part 2+ workplaces",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "Jobs: doctor, teacher, pilot, vet, cook, police, fireman, ",
+        "isReview": false,
+        "words": [
+          "doctor",
+          "teacher",
+          "pilot",
+          "vet",
+          "cook",
+          "police",
+          "fireman",
+          "scientist 5-6yo",
+          "astronaut 5-6yo",
+          "farmer",
+          "driver"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": "Review:  doctor, teacher, pilot, vet, cook, police, fireman, ",
+        "isReview": true,
+        "words": [
+          "doctor",
+          "teacher",
+          "pilot",
+          "vet",
+          "cook",
+          "police",
+          "fireman",
+          "scientist 5-6yo",
+          "astronaut 5-6yo",
+          "farmer",
+          "driver"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "brush⁠, ⁠cook⁠, ⁠fly⁠, ⁠drive⁠, ⁠wash⁠, ⁠eat⁠, ⁠drink⁠, ⁠sleep⁠, ⁠walk⁠, ⁠run",
+        "isReview": false,
+        "words": [
+          "brush",
+          "cook",
+          "fly",
+          "drive",
+          "wash",
+          "eat",
+          "drink",
+          "sleep",
+          "walk",
+          "run"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "brush⁠, ⁠cook⁠, ⁠fly⁠, ⁠drive⁠, ⁠wash⁠, ⁠eat⁠, ⁠drink⁠, ⁠sleep⁠, ⁠walk⁠, ⁠run",
+        "isReview": false,
+        "words": [
+          "brush",
+          "cook",
+          "fly",
+          "drive",
+          "wash",
+          "eat",
+          "drink",
+          "sleep",
+          "walk",
+          "run"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "2026-12",
+    "year": 2026,
+    "month": 12,
+    "titleVi": "Mùa đông - Giáng sinh",
+    "titleEn": "Winter - Christmas",
+    "topicPlan": "2 weeks: Hello winter\n2 weeks: Christmas",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "Weather: sunny, cloudy, rainy, snowy, windy, hot, cold, ",
+        "isReview": false,
+        "words": [
+          "sunny",
+          "cloudy",
+          "rainy",
+          "snowy",
+          "windy",
+          "hot",
+          "cold",
+          "warm",
+          "spring",
+          "winter",
+          "autumn",
+          "fall"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": "Hello Winter: Winter, Cold, Snow, Snowflake, ",
+        "isReview": false,
+        "words": [
+          "winter",
+          "cold",
+          "snow",
+          "snowflake",
+          "windy",
+          "coat",
+          "scarf",
+          "gloves",
+          "hat",
+          "boots",
+          "snowman",
+          "snowball",
+          "ice",
+          "sled",
+          "blanket",
+          "hot chocolate"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "Christmas: elf, santa, present, christmas tree, reindeer, ",
+        "isReview": false,
+        "words": [
+          "elf",
+          "santa",
+          "present",
+          "christmas tree",
+          "reindeer",
+          "snowman",
+          "jingle bell",
+          "candy cane",
+          "snowball",
+          "stocking"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "Review Christmas: elf, santa, present, christmas tree, reindeer, ",
+        "isReview": true,
+        "words": [
+          "elf",
+          "santa",
+          "present",
+          "christmas tree",
+          "reindeer",
+          "snowman",
+          "jingle bell",
+          "candy cane",
+          "snowball",
+          "stocking"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "2027-01",
+    "year": 2027,
+    "month": 1,
+    "titleVi": "Mùa xuân - Thực vật",
+    "titleEn": "Spring - Plants",
+    "topicPlan": "2 weeks: flowers+fruits in the spring\n2 weeks: vegetables",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "Flowers: roots, stem, leaves, flower",
+        "isReview": false,
+        "words": [
+          "roots",
+          "stem",
+          "leaves",
+          "flower",
+          "rose",
+          "sunflower",
+          "daisy",
+          "lotus",
+          "lily",
+          "tulip"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": "Review Flowers: roots, stem, leaves, flower",
+        "isReview": true,
+        "words": [
+          "roots",
+          "stem",
+          "leaves",
+          "flower",
+          "rose",
+          "sunflower",
+          "daisy",
+          "lotus",
+          "lily",
+          "tulip"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "Vegetables: cucumber, onion, eggplant, garlic, ginger, ",
+        "isReview": false,
+        "words": [
+          "cucumber",
+          "onion",
+          "eggplant",
+          "garlic",
+          "ginger",
+          "bell pepper",
+          "beetroot",
+          "tomato",
+          "green onion",
+          "potato",
+          "corn",
+          "carrot"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "Review vegetables: cucumber, onion, eggplant, garlic, ginger, ",
+        "isReview": true,
+        "words": [
+          "cucumber",
+          "onion",
+          "eggplant",
+          "garlic",
+          "ginger",
+          "bell pepper",
+          "beetroot",
+          "tomato",
+          "green onion",
+          "potato",
+          "corn",
+          "carrot"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "2027-02",
+    "year": 2027,
+    "month": 2,
+    "titleVi": "Tết cổ truyền",
+    "titleEn": "Traditional New Year",
+    "topicPlan": "2 weeks: Tet holiday\n2 weeks: 12 Zodiacs",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "Tet holiday: papaya, coconut, mango, fig, Custard apple, ",
+        "isReview": false,
+        "words": [
+          "papaya",
+          "coconut",
+          "mango",
+          "fig",
+          "custard apple",
+          "lucky money",
+          "watermelon",
+          "sticky rice cake",
+          "dragon dance"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": "Review: Tet holiday: papaya, coconut, mango, fig, ",
+        "isReview": true,
+        "words": [
+          "tet holiday papaya",
+          "coconut",
+          "mango",
+          "fig",
+          "custard apple",
+          "lucky money",
+          "watermelon",
+          "sticky rice cake",
+          "dragon dance"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "Zodiac: rat, dragon, goat, chicken, snake, horse, ",
+        "isReview": false,
+        "words": [
+          "rat",
+          "dragon",
+          "goat",
+          "chicken",
+          "snake",
+          "horse",
+          "tiger",
+          "ox",
+          "monkey",
+          "pig",
+          "cat",
+          "dog"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "Review: Zodiac: rat, dragon, goat, chicken, snake, horse, ",
+        "isReview": true,
+        "words": [
+          "zodiac rat",
+          "dragon",
+          "goat",
+          "chicken",
+          "snake",
+          "horse",
+          "tiger",
+          "ox",
+          "monkey",
+          "pig",
+          "cat",
+          "dog"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "2027-03",
+    "year": 2027,
+    "month": 3,
+    "titleVi": "Giao thông",
+    "titleEn": "Transportation",
+    "topicPlan": "2 weeks: vehicles\n2 weeks: How We Travel",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "Vehicles:  car, bike, train, bus, rocket, plane, ship, ",
+        "isReview": false,
+        "words": [
+          "car",
+          "bike",
+          "train",
+          "bus",
+          "rocket",
+          "plane",
+          "ship",
+          "truck",
+          "motorbike",
+          "submarine",
+          "taxi",
+          "boat"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": "Review Vehicles:  car, bike, train, bus, rocket,",
+        "isReview": true,
+        "words": [
+          "car",
+          "bike",
+          "train",
+          "bus",
+          "rocket",
+          "plane",
+          "ship",
+          "truck",
+          "motorbike",
+          "submarine",
+          "taxi",
+          "boat"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "Road Safety: stop, wait, walk, look, listen, helmet, ",
+        "isReview": false,
+        "words": [
+          "stop",
+          "wait",
+          "walk",
+          "look",
+          "listen",
+          "helmet",
+          "sidewalk",
+          "turn left",
+          "turn right",
+          "go straight"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "Review \"Road Safety: stop, wait, walk, look, listen, helmet, ",
+        "isReview": true,
+        "words": [
+          "stop",
+          "wait",
+          "walk",
+          "look",
+          "listen",
+          "helmet",
+          "sidewalk",
+          "turn left",
+          "turn right",
+          "go straight"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "2027-04",
+    "year": 2027,
+    "month": 4,
+    "titleVi": "Bảo vệ môi trường",
+    "titleEn": "Environment Protection",
+    "topicPlan": "2 weeks: recycle\n2 weeks: plant cycle",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "Recycling: glass, box, metal, paper, plastic, ",
+        "isReview": false,
+        "words": [
+          "glass",
+          "box",
+          "metal",
+          "paper",
+          "plastic",
+          "trash",
+          "can",
+          "bin",
+          "recycle"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": "Review Recycling: glass, box, metal, paper, plastic, ",
+        "isReview": true,
+        "words": [
+          "glass",
+          "box",
+          "metal",
+          "paper",
+          "plastic",
+          "trash",
+          "can",
+          "bin",
+          "recycle"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "Nature: seed, root, stem, leaf, flower, fruit, soil, water, air, sun",
+        "isReview": false,
+        "words": [
+          "seed",
+          "root",
+          "stem",
+          "leaf",
+          "flower",
+          "fruit",
+          "soil",
+          "water",
+          "air",
+          "sun"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "Review Nature: seed, root, stem, leaf, flower, fruit, soil, water, air, sun",
+        "isReview": true,
+        "words": [
+          "seed",
+          "root",
+          "stem",
+          "leaf",
+          "flower",
+          "fruit",
+          "soil",
+          "water",
+          "air",
+          "sun"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "2027-05",
+    "year": 2027,
+    "month": 5,
+    "titleVi": "Đất nước - Thế giới",
+    "titleEn": "Our country - The World",
+    "topicPlan": "2 weeks: Flags of \n2 weeks: nature",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "Vietnam: Pho, conical hat, ao dai, Ben Thanh market, lotus,",
+        "isReview": false,
+        "words": [
+          "pho",
+          "conical hat",
+          "ao dai",
+          "ben thanh market",
+          "lotus",
+          "ha noi",
+          "water buffalo",
+          "bamboo"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": "Review Vietnam: Pho, conical hat, ao dai,",
+        "isReview": true,
+        "words": [
+          "pho",
+          "conical hat",
+          "ao dai",
+          "ben thanh market",
+          "lotus",
+          "ha noi",
+          "water buffalo",
+          "bamboo"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "Australia: kangaroo, koala, boomerang, ",
+        "isReview": false,
+        "words": [
+          "kangaroo",
+          "koala",
+          "boomerang",
+          "sydney opera house",
+          "meat pie",
+          "vegemite",
+          "sausage",
+          "barbecue"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "Review \"Australia: kangaroo, koala, boomerang, ",
+        "isReview": true,
+        "words": [
+          "kangaroo",
+          "koala",
+          "boomerang",
+          "sydney opera house",
+          "meat pie",
+          "vegemite",
+          "sausage",
+          "barbecue"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "2027-06",
+    "year": 2027,
+    "month": 6,
+    "titleVi": "Gia đình",
+    "titleEn": "Family",
+    "topicPlan": "2 weeks: family members part 1\n2 weeks: Family member part 2",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "Family: mom, dad, grandma, grandpa, uncle, aunt, baby, ",
+        "isReview": false,
+        "words": [
+          "mom",
+          "dad",
+          "grandma",
+          "grandpa",
+          "uncle",
+          "aunt",
+          "baby",
+          "brother",
+          "sister"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": "Review family: mom, dad, grandma, grandpa, uncle, aunt, baby, ",
+        "isReview": true,
+        "words": [
+          "mom",
+          "dad",
+          "grandma",
+          "grandpa",
+          "uncle",
+          "aunt",
+          "baby",
+          "brother",
+          "sister"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "Family: wife, husband, cousin, daughter, son, grandson,",
+        "isReview": false,
+        "words": [
+          "wife",
+          "husband",
+          "cousin",
+          "daughter",
+          "son",
+          "grandson",
+          "granddaughter",
+          "parents"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "Review family: wife, husband, cousin, daughter, son, grandson,",
+        "isReview": true,
+        "words": [
+          "wife",
+          "husband",
+          "cousin",
+          "daughter",
+          "son",
+          "grandson",
+          "granddaughter",
+          "parents"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "2027-07",
+    "year": 2027,
+    "month": 7,
+    "titleVi": "Mùa hè sôi động",
+    "titleEn": "Fun Summer",
+    "topicPlan": "2 weeks: hawaii\n2 weeks: sea animals",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "hawaii: beach, coconut, wave, surfing, sunglasses, ",
+        "isReview": false,
+        "words": [
+          "beach",
+          "coconut",
+          "wave",
+          "surfing",
+          "sunglasses",
+          "sunscreen",
+          "sand castle",
+          "ukulele",
+          "hula dance"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": "Review hawaii: beach, coconut, wave, surfing, sunglasses, ",
+        "isReview": true,
+        "words": [
+          "beach",
+          "coconut",
+          "wave",
+          "surfing",
+          "sunglasses",
+          "sunscreen",
+          "sand castle",
+          "ukulele",
+          "hula dance"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "Sea animals: dolphin, shark, coral, whale, sea horse, ",
+        "isReview": false,
+        "words": [
+          "dolphin",
+          "shark",
+          "coral",
+          "whale",
+          "sea horse",
+          "lobster",
+          "squid",
+          "jellyfish",
+          "starfish",
+          "shell"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "Sea animals: dolphin, shark, coral, whale, sea horse, ",
+        "isReview": false,
+        "words": [
+          "dolphin",
+          "shark",
+          "coral",
+          "whale",
+          "sea horse",
+          "lobster",
+          "squid",
+          "jellyfish",
+          "starfish",
+          "shell"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "2027-08",
+    "year": 2027,
+    "month": 8,
+    "titleVi": "Vòng quanh thế giới",
+    "titleEn": "Around the world",
+    "topicPlan": "2 weeks: Flags of countries\n2 weeks: ?",
+    "weeks": [
+      {
+        "weekIndex": 1,
+        "label": "Flags : America, England, Italy, France, Canada, Russia, ",
+        "isReview": false,
+        "words": [
+          "america",
+          "england",
+          "italy",
+          "france",
+          "canada",
+          "russia",
+          "japan",
+          "vietnam",
+          "china",
+          "korea",
+          "india"
+        ]
+      },
+      {
+        "weekIndex": 2,
+        "label": "Review Flags : America, England, Italy, France, Canada, Russia, ",
+        "isReview": true,
+        "words": [
+          "america",
+          "england",
+          "italy",
+          "france",
+          "canada",
+          "russia",
+          "japan",
+          "vietnam",
+          "china",
+          "korea",
+          "india"
+        ]
+      },
+      {
+        "weekIndex": 3,
+        "label": "Famous Places: Palace, City, Wall, Statue, Mountain, ",
+        "isReview": false,
+        "words": [
+          "palace",
+          "city",
+          "wall",
+          "statue",
+          "mountain",
+          "pyramid",
+          "castle",
+          "temple"
+        ]
+      },
+      {
+        "weekIndex": 4,
+        "label": "Famous Places: Palace, City, Wall, Statue, Mountain, ",
+        "isReview": false,
+        "words": [
+          "palace",
+          "city",
+          "wall",
+          "statue",
+          "mountain",
+          "pyramid",
+          "castle",
+          "temple"
+        ]
+      }
+    ]
+  }
+]
