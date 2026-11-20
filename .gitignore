@@ -104,3 +104,7 @@ docs/WeWIN_Super_Kids_Split/
 GAS/
 
 backend/scripts/data/
+
+# Vercel local link artifacts
+.vercel
+.env.local

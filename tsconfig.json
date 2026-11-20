@@ -19,5 +19,13 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "frontend", "backend", "web"]
+  "exclude": [
+    "node_modules",
+    "frontend",
+    "backend",
+    "web",
+    "Anschool-main",
+    "GAS",
+    "docs"
+  ]
 }
