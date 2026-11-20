@@ -1,4 +1,4 @@
-# WeWIN Cambridge (Next.js monolith)
+# Noraschool (WeWIN Cambridge)
 
 Full-stack Next.js app (IELTS/Chinese stack): App Router, Prisma 7 + Neon, Zod, signed cookie auth, Vercel.
 
