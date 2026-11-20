@@ -144,13 +144,12 @@ export function MemoryGame({
         const pairTotal = sessionWords.length;
 
         if (firstCard && secondCard && firstCard.wordId === secondCard.wordId) {
-          triggerFeedback("correct");
           const pointsEarned = memoryPairPoints(
             nextFlipCounts[firstId] || 0,
             nextFlipCounts[secondId] || 0,
           );
 
-          setTimeout(() => {
+          void triggerFeedback("correct").then(() => {
             setCards((prev) =>
               prev.map((c) =>
                 c.wordId === firstCard.wordId ? { ...c, isMatched: true, isFlipped: true } : c,
@@ -180,10 +179,9 @@ export function MemoryGame({
 
             setFlippedCards([]);
             setIsChecking(false);
-          }, 500);
+          });
         } else {
-          triggerFeedback("wrong");
-          setTimeout(() => {
+          void triggerFeedback("wrong").then(() => {
             setCards((prev) =>
               prev.map((c) =>
                 newFlipped.includes(c.id) ? { ...c, isFlipped: false } : c,
@@ -196,7 +194,7 @@ export function MemoryGame({
             setStatusType("warning");
 
             setIsChecking(false);
-          }, 1000);
+          });
         }
       }
     },

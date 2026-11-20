@@ -13,11 +13,8 @@ import {
   Gamepad2,
   LockKeyhole,
   LibraryBig,
-  Warehouse,
   School,
   Users,
-  History,
-  ListChecks,
   List,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -451,12 +448,7 @@ function MobileMenu({
   const canViewClassList = hasPermission(PERMISSIONS.CLASS_VIEW_LIST);
   const canViewClassCategory = hasPermission(PERMISSIONS.CLASS_CATEGORY_VIEW);
   const canViewStudent = hasPermission(PERMISSIONS.STUDENT_VIEW);
-  const canViewStorageList = hasPermission(PERMISSIONS.STORAGE_VIEW_LIST);
-  const canViewStorageApprove = hasPermission(PERMISSIONS.STORAGE_APPROVE_VIEW);
-  const canViewStorageHistory = hasPermission(PERMISSIONS.STORAGE_HISTORY_VIEW);
   const canViewClass = canViewClassList || canViewClassCategory;
-  const canViewStorage =
-    canViewStorageList || canViewStorageApprove || canViewStorageHistory;
 
   return (
     <AnimatePresence>
@@ -782,58 +774,6 @@ function MobileMenu({
                   </div>
                 )}
 
-                {canViewStorage && (
-                  <div className="space-y-2 mt-6">
-                    <div className="flex items-center gap-2 px-3 py-2">
-                      <Warehouse className="w-4 h-4 text-amber-300" />
-                      <h3 className="text-xs font-bold text-amber-200 uppercase tracking-wider">
-                        Kho lưu trữ
-                      </h3>
-                    </div>
-                    {canViewStorageList && (
-                      <Link
-                        href={Routes.MANAGE_STORAGE_LIST}
-                        onClick={() => setMenuOpen(false)}
-                        className="group flex items-center gap-3 px-4 py-3 rounded-xl
-                             bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/30
-                             transition-all duration-200 hover:scale-[1.02]"
-                      >
-                        <List className="w-4 h-4 text-amber-300" />
-                        <span className="text-[#af4e80] font-medium text-sm flex-1">
-                          Danh sách
-                        </span>
-                      </Link>
-                    )}
-                    {canViewStorageApprove && (
-                      <Link
-                        href={Routes.MANAGE_STORAGE_REQUEST}
-                        onClick={() => setMenuOpen(false)}
-                        className="group flex items-center gap-3 px-4 py-3 rounded-xl
-                             bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/30
-                             transition-all duration-200 hover:scale-[1.02]"
-                      >
-                        <ListChecks className="w-4 h-4 text-amber-300" />
-                        <span className="text-[#af4e80] font-medium text-sm flex-1">
-                          Chờ duyệt
-                        </span>
-                      </Link>
-                    )}
-                    {canViewStorageHistory && (
-                      <Link
-                        href={Routes.MANAGE_STORAGE_HISTORY}
-                        onClick={() => setMenuOpen(false)}
-                        className="group flex items-center gap-3 px-4 py-3 rounded-xl
-                             bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/30
-                             transition-all duration-200 hover:scale-[1.02]"
-                      >
-                        <History className="w-4 h-4 text-amber-300" />
-                        <span className="text-[#af4e80] font-medium text-sm flex-1">
-                          Lịch sử
-                        </span>
-                      </Link>
-                    )}
-                  </div>
-                )}
               </>
             )}
           </div>

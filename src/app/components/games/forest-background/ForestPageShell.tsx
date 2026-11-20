@@ -3,14 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
-import { Trophy } from "lucide-react";
+import { ClipboardList, Trophy } from "lucide-react";
 
 import { AudioControls } from "@/app/components/audio";
 import Footer from "@/app/components/layouts/footer";
 import { markLeaderboardVisit } from "@/lib/games/leaderboardNav";
-import { isFullscreenGameRoute } from "@/lib/constants/routes";
+import { isFullscreenGameRoute, Routes } from "@/lib/constants/routes";
+import { useAuthStore } from "@/stores/auth.store";
 
 import { FantasyForestBackground } from "./FantasyForestBackground";
+import { ForestAuthControl } from "./ForestAuthControl";
 import { ForestThemeProvider } from "./ForestThemeContext";
 import { SeasonThemeSwitcher } from "./SeasonThemeSwitcher";
 import { useForestTheme } from "./useForestTheme";
@@ -43,6 +45,11 @@ export function ForestPageShell({
   const isFullscreen = isFullscreenGameRoute(pathname);
   const forestTheme = useForestTheme();
   const { theme, setTheme, config } = forestTheme;
+  const user = useAuthStore((s) => s.user);
+  const isStaff = !!user?.roles?.some(
+    (r) =>
+      (r.name === "TEACHER" || r.name === "ADMIN") && r.isDisabled !== true,
+  );
   const [reducedMotion, setReducedMotion] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -139,6 +146,25 @@ export function ForestPageShell({
               />
             </div>
           ) : null}
+
+          {isStaff ? (
+            <div className="pointer-events-auto">
+              <Link
+                href={Routes.MANAGE_CLASS}
+                aria-label="Giao bài tập"
+                title="Giao bài tập cho giáo viên"
+                className="flex h-9 items-center justify-center gap-1.5 rounded-full border border-amber-300/70 bg-amber-400 px-2.5 text-xs font-bold text-blue-900 shadow-md transition hover:scale-105 hover:bg-amber-300 sm:h-10 sm:px-3 sm:text-sm"
+              >
+                <ClipboardList className="h-4 w-4 shrink-0 sm:h-[18px] sm:w-[18px]" />
+                <span className="hidden sm:inline">Giao bài tập</span>
+              </Link>
+            </div>
+          ) : null}
+
+          {/* Login at the outer right edge */}
+          <div className="pointer-events-auto">
+            <ForestAuthControl />
+          </div>
         </div>
       </div>
     </ForestThemeProvider>

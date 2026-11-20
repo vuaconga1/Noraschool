@@ -96,6 +96,9 @@ const createDefaultProgress = (): ProgressState => ({
   memory: false,
   ordering: false,
   scramble: false,
+  listen: false,
+  look: false,
+  catch: false,
 });
 
 const createDefaultScores = (): ScoreState => ({
@@ -105,6 +108,9 @@ const createDefaultScores = (): ScoreState => ({
   memory: 0,
   ordering: 0,
   scramble: 0,
+  listen: 0,
+  look: 0,
+  catch: 0,
 });
 
 /* ---------------------------------------------------
@@ -118,6 +124,9 @@ const GAME_TITLES: Record<GameKey, string> = {
   memory: "Memory Game",
   ordering: "Word Ordering Game",
   scramble: "Word Scramble Game",
+  listen: "Listen & Choose",
+  look: "Look & Choose",
+  catch: "Catching",
 };
 
 /* ---------------------------------------------------
@@ -165,8 +174,14 @@ export function UnitGameScreen({
     const last = segments[segments.length - 1];
 
     const valid: GameKey[] = [
-      "flip", "speak",
-      "memory", "ordering", "scramble"
+      "flip",
+      "speak",
+      "memory",
+      "ordering",
+      "scramble",
+      "listen",
+      "look",
+      "catch",
     ];
 
     return valid.includes(last as GameKey)
@@ -182,6 +197,9 @@ export function UnitGameScreen({
       "memory",
       "ordering",
       "scramble",
+      "listen",
+      "look",
+      "catch",
     ];
 
     // Case 1: .../[slug]/[part]/[game]
@@ -344,7 +362,10 @@ useEffect(() => {
       view === "speak" ||
       view === "memory" ||
       view === "ordering" ||
-      view === "scramble";
+      view === "scramble" ||
+      view === "listen" ||
+      view === "look" ||
+      view === "catch";
 
     if (isGameView) {
       setMode("play");
@@ -847,7 +868,7 @@ if (mode === "select" && multipleParts) {
 }
 
 return wrapShell(
-  <div className="flex min-h-screen flex-col bg-transparent pb-24 md:pb-20">
+  <div className="flex h-dvh max-h-dvh flex-col overflow-hidden bg-transparent pb-14 md:pb-12">
 
     <GameMobileToolbar
       onBack={handleBack}
@@ -912,11 +933,11 @@ return wrapShell(
       </div>
     )}
 
-    {/* Title — desktop only (mobile: toolbar) */}
-    <div className="mx-auto hidden max-w-7xl shrink-0 flex-col items-center gap-2 px-4 pt-2 text-center md:mb-1 md:flex md:pt-2">
+    {/* Title — desktop only (mobile: toolbar); compact to fit cards */}
+    <div className="mx-auto hidden max-w-7xl shrink-0 flex-col items-center gap-1 px-4 pt-1 text-center md:mb-0 md:flex md:pt-1">
 
       <h1
-        className="mb-0 max-w-full break-words px-2 text-xl font-bold text-white drop-shadow-lg sm:text-4xl md:text-5xl"
+        className="mb-0 max-w-full break-words px-2 text-lg font-bold text-white drop-shadow-lg sm:text-2xl md:text-3xl lg:text-4xl"
         style={{ textShadow: "0 12px 25px rgba(0,0,0,0.3)", color: "#E30076" }}
       >
         {displayUnitName}

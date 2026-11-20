@@ -11,11 +11,8 @@ import {
   UserCog,
   PanelLeftClose,
   PanelLeftOpen,
-  Warehouse,
   School,
   List,
-  ListChecks,
-  History,
 } from "lucide-react";
 import { Routes } from "@/lib/constants/routes";
 import { useAuthStore } from "@/stores/auth.store";
@@ -35,23 +32,9 @@ export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const openMenu = isClassRoute || manualOpen;
 
-  const isStorageRoute =
-    pathname === Routes.MANAGE_STORAGE ||
-    pathname.startsWith(`${Routes.MANAGE_STORAGE}/`);
-
-  const [storageOpen, setStorageOpen] = useState(true);
-
-  const openStorageMenu = isStorageRoute || storageOpen;
-
   const canViewClass = hasPermission(PERMISSIONS.CLASS_VIEW_LIST);
   const canManageUsers = useAuthStore((s) => s.hasRole("TEACHER"));
   const canViewStudent = hasPermission(PERMISSIONS.STUDENT_VIEW);
-  const canViewStorageList = hasPermission(PERMISSIONS.STORAGE_VIEW_LIST);
-  const canViewStorageCategoryList = hasPermission(PERMISSIONS.STORAGE_CATEGORY_VIEW_LIST);
-  const canViewStorageApprove = hasPermission(PERMISSIONS.STORAGE_APPROVE_VIEW);
-  const canViewStorageHistory = hasPermission(PERMISSIONS.STORAGE_HISTORY_VIEW);
-  const canViewStorage =
-    canViewStorageList || canViewStorageCategoryList || canViewStorageApprove || canViewStorageHistory;
   // ✅ Logic xác định active
   const isActive = (paths: string[]) =>
     paths.some((p) => pathname === p || pathname.startsWith(`${p}/`));
@@ -167,94 +150,6 @@ export default function Sidebar() {
           />
         )}
 
-        {/* Group: Storage Management */}
-        {canViewStorage && (
-          <div>
-            <button
-              onClick={() => setStorageOpen((v) => !v)}
-              className={`flex items-center justify-between w-full text-left px-3 py-2.5 rounded-xl 
-            transition-all duration-200 group 
-            ${
-              isGroupActive(Routes.MANAGE_STORAGE)
-                ? "bg-white/10"
-                : "hover:bg-white/10"
-            }`}
-            >
-              <span className="flex items-center gap-3">
-                <div
-                  className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${
-                    isGroupActive(Routes.MANAGE_STORAGE)
-                      ? "bg-white/20"
-                      : "bg-white/10 group-hover:bg-white/20"
-                  }`}
-                >
-                  <Warehouse className="w-4 h-4" />
-                </div>
-
-                {!collapsed && (
-                  <span className="font-semibold text-[15px]">Kho lưu trữ</span>
-                )}
-              </span>
-
-              {!collapsed && (
-                <div
-                  className={`w-6 h-6 bg-white/10 rounded-md flex items-center justify-center 
-          group-hover:bg-white/20 transition-all ${
-            openStorageMenu ? "rotate-0" : "-rotate-90"
-          }`}
-                >
-                  <ChevronDown size={14} className="text-white/80" />
-                </div>
-              )}
-            </button>
-
-            {/* Submenu Storage */}
-            {!collapsed && openStorageMenu && (
-              <ul className="ml-3 mt-2 space-y-1 border-l-2 border-white/20 pl-4">
-                {canViewStorageList && (
-                  <li>
-                    <SidebarLink
-                      href={Routes.MANAGE_STORAGE_LIST}
-                      label="Danh sách"
-                      icon={<List className="w-4 h-4" />}
-                      active={isActive([Routes.MANAGE_STORAGE_LIST])}
-                    />
-                  </li>
-                )}
-                {canViewStorageCategoryList && (
-                  <li>
-                    <SidebarLink
-                      href={Routes.MANAGE_STORAGE_CATEGORY_LIST}
-                      label="Danh mục"
-                      icon={<FolderOpen className="w-4 h-4" />}
-                      active={isActive([Routes.MANAGE_STORAGE_CATEGORY_LIST])}
-                    />
-                  </li>
-                )}
-                {canViewStorageApprove && (
-                  <li>
-                    <SidebarLink
-                      href={Routes.MANAGE_STORAGE_REQUEST}
-                      label="Chờ duyệt"
-                      icon={<ListChecks className="w-4 h-4" />}
-                      active={isActive([Routes.MANAGE_STORAGE_REQUEST])}
-                    />
-                  </li>
-                )}
-                {canViewStorageHistory && (
-                  <li>
-                    <SidebarLink
-                      href={Routes.MANAGE_STORAGE_HISTORY}
-                      label="Lịch sử"
-                      icon={<History className="w-4 h-4" />}
-                      active={isActive([Routes.MANAGE_STORAGE_HISTORY])}
-                    />
-                  </li>
-                )}
-              </ul>
-            )}
-          </div>
-        )}
       </nav>
 
       {/* 🔹 Nút toggle thu gọn ở cuối sidebar */}

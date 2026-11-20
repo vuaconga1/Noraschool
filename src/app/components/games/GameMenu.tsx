@@ -4,6 +4,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
   useTransition,
 } from "react";
@@ -31,6 +32,9 @@ import {
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
+  Headphones,
+  Eye,
+  ShoppingBasket,
 } from "lucide-react";
 
 const FlipCardGame = dynamic(
@@ -67,6 +71,28 @@ const WordScrambleGame = dynamic(
     import("@/app/components/games/WordScrambleGame").then(
       (m) => m.WordScrambleGame
     ),
+  { ssr: false }
+);
+
+const ListenChooseGame = dynamic(
+  () =>
+    import("@/app/components/games/ListenChooseGame").then(
+      (m) => m.ListenChooseGame
+    ),
+  { ssr: false }
+);
+
+const LookChooseGame = dynamic(
+  () =>
+    import("@/app/components/games/LookChooseGame").then(
+      (m) => m.LookChooseGame
+    ),
+  { ssr: false }
+);
+
+const CatchingGame = dynamic(
+  () =>
+    import("@/app/components/games/CatchingGame").then((m) => m.CatchingGame),
   { ssr: false }
 );
 
@@ -134,40 +160,106 @@ export function GameMenu({
   );
   const [isPending, startTransition] = useTransition();
   const [activeCardIndex, setActiveCardIndex] = useState(0);
-  const [cardSize, setCardSize] = useState({ width: 408, height: 504 });
+  const [cardSize, setCardSize] = useState({ width: 240, height: 296 });
   const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const gridAreaRef = useRef<HTMLDivElement>(null);
   const { ui: menuUi } = useGameSeasonTheme("menu");
 
   useEffect(() => {
-    const updateCardSize = () => {
+    const CARD_RATIO = 0.81; // width / height
+    const GAP = 12;
+    const COLS = 4;
+    const ROWS = 2;
+
+    const sizeFromViewportFallback = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
       const large = w >= 1024;
       setIsLargeScreen(large);
 
       if (large) {
-        const height = Math.min(Math.floor(h * 0.48), 420);
-        const width = Math.round(height * 0.81);
+        // Reserve ~220px for breadcrumb/title/mascot/progress — never use full window.
+        const usableH = Math.max(280, h - 260);
+        const maxCardH = Math.min(
+          Math.floor((usableH - GAP) / ROWS),
+          280,
+        );
+        const usableW = Math.min(w - 280, 1080); // sidebar + margins
+        const maxCardW = Math.floor((usableW - GAP * (COLS - 1)) / COLS);
+        let height = maxCardH;
+        let width = Math.round(height * CARD_RATIO);
+        if (width > maxCardW) {
+          width = maxCardW;
+          height = Math.round(width / CARD_RATIO);
+        }
         setCardSize({ width, height });
-      } else if (w >= 768) {
-        const height = Math.min(Math.floor(h * 0.55), 504);
-        const width = Math.min(408, Math.round(height * 0.81));
-        setCardSize({ width, height: Math.round(width / 0.81) });
+        return;
+      }
+
+      if (w >= 768) {
+        const height = Math.min(Math.floor(h * 0.38), 280);
+        const width = Math.min(240, Math.round(height * CARD_RATIO));
+        setCardSize({ width, height: Math.round(width / CARD_RATIO) });
       } else if (w < 400) {
-        const width = Math.min(240, Math.floor(w * 0.66));
+        const width = Math.min(200, Math.floor(w * 0.58));
         setCardSize({ width, height: Math.round(width * 1.27) });
       } else if (w < 640) {
-        const width = Math.min(280, Math.floor(w * 0.66));
+        const width = Math.min(230, Math.floor(w * 0.58));
         setCardSize({ width, height: Math.round(width * 1.27) });
       } else {
-        const width = Math.min(320, Math.floor(w * 0.5));
+        const width = Math.min(250, Math.floor(w * 0.42));
         setCardSize({ width, height: Math.round(width * 1.25) });
       }
     };
 
-    updateCardSize();
-    window.addEventListener("resize", updateCardSize);
-    return () => window.removeEventListener("resize", updateCardSize);
+    const sizeFromGridArea = () => {
+      const el = gridAreaRef.current;
+      const large = window.innerWidth >= 1024;
+      setIsLargeScreen(large);
+      if (!large || !el) {
+        sizeFromViewportFallback();
+        return;
+      }
+
+      const { width: areaW, height: areaH } = el.getBoundingClientRect();
+      if (areaW < 80 || areaH < 80) {
+        sizeFromViewportFallback();
+        return;
+      }
+
+      // Fit 4×2 inside the remaining flex area (already excludes header/mascot).
+      const maxCardH = Math.floor((areaH - GAP) / ROWS);
+      const maxCardW = Math.floor((areaW - GAP * (COLS - 1)) / COLS);
+      let height = Math.min(maxCardH, 280);
+      let width = Math.round(height * CARD_RATIO);
+      if (width > maxCardW) {
+        width = maxCardW;
+        height = Math.round(width / CARD_RATIO);
+      }
+      // Keep a readable floor without overflowing.
+      height = Math.max(180, Math.min(height, maxCardH));
+      width = Math.round(height * CARD_RATIO);
+      if (width > maxCardW) {
+        width = maxCardW;
+        height = Math.round(width / CARD_RATIO);
+      }
+      setCardSize({ width, height });
+    };
+
+    sizeFromGridArea();
+    window.addEventListener("resize", sizeFromGridArea);
+
+    const el = gridAreaRef.current;
+    let ro: ResizeObserver | null = null;
+    if (el && typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(() => sizeFromGridArea());
+      ro.observe(el);
+    }
+
+    return () => {
+      window.removeEventListener("resize", sizeFromGridArea);
+      ro?.disconnect();
+    };
   }, []);
 
   // Xác định game từ URL nếu có dạng .../[slug]/[game]
@@ -179,7 +271,10 @@ export function GameMenu({
       lastSegment === "speak" ||
       lastSegment === "memory" ||
       lastSegment === "ordering" ||
-      lastSegment === "scramble"
+      lastSegment === "scramble" ||
+      lastSegment === "listen" ||
+      lastSegment === "look" ||
+      lastSegment === "catch"
         ? (lastSegment as GameType)
         : "menu";
 
@@ -315,6 +410,39 @@ export function GameMenu({
           "bg-gradient-to-br from-pink-500 to-fuchsia-600 shadow-pink-400/40 text-white",
         progressKey: "scramble",
       },
+      {
+        type: "listen",
+        title: "Listen & Choose",
+        description: "Nghe từ và chọn hình đúng",
+        icon: <Headphones className="w-6 h-6 sm:w-7 sm:h-7" />,
+        accentClass:
+          "bg-gradient-to-br from-violet-400 via-purple-500 to-indigo-600 border-violet-400 shadow-violet-400/50 text-white",
+        iconWrapClass:
+          "bg-gradient-to-br from-violet-500 to-indigo-600 shadow-violet-400/40 text-white",
+        progressKey: "listen",
+      },
+      {
+        type: "look",
+        title: "Look & Choose",
+        description: "Nhìn hình chọn từ đúng",
+        icon: <Eye className="w-6 h-6 sm:w-7 sm:h-7" />,
+        accentClass:
+          "bg-gradient-to-br from-amber-400 via-yellow-400 to-orange-500 border-amber-400 shadow-amber-400/50 text-white",
+        iconWrapClass:
+          "bg-gradient-to-br from-amber-500 to-orange-500 shadow-amber-400/40 text-white",
+        progressKey: "look",
+      },
+      {
+        type: "catch",
+        title: "Catching",
+        description: "Hứng từ vựng đang rơi",
+        icon: <ShoppingBasket className="w-6 h-6 sm:w-7 sm:h-7" />,
+        accentClass:
+          "bg-gradient-to-br from-teal-400 via-cyan-500 to-emerald-500 border-teal-400 shadow-teal-400/50 text-white",
+        iconWrapClass:
+          "bg-gradient-to-br from-teal-500 to-cyan-600 shadow-teal-400/40 text-white",
+        progressKey: "catch",
+      },
     ],
     []
   );
@@ -439,7 +567,13 @@ export function GameMenu({
             ? "bg-[url('/assets/memory.png')] bg-cover bg-center bg-no-repeat"
             : card.type === "ordering"
               ? "bg-[url('/assets/wordordering.png')] bg-cover bg-center bg-no-repeat"
-              : card.accentClass;
+              : card.type === "listen"
+                ? "bg-[url('/assets/games/listen-choose.jpg')] bg-cover bg-center bg-no-repeat"
+                : card.type === "look"
+                  ? "bg-[url('/assets/games/look-choose.jpg')] bg-cover bg-center bg-no-repeat"
+                  : card.type === "catch"
+                    ? "bg-[url('/assets/games/catching-card.jpg')] bg-cover bg-center bg-no-repeat"
+                    : card.accentClass;
 
   const renderGameCardFace = useCallback(
     (card: GameCard, emphasized: boolean, cta: string) => {
@@ -450,7 +584,10 @@ export function GameMenu({
         card.type === "speak" ||
         card.type === "memory" ||
         card.type === "ordering" ||
-        card.type === "flip";
+        card.type === "flip" ||
+        card.type === "listen" ||
+        card.type === "look" ||
+        card.type === "catch";
 
       return (
         <>
@@ -582,8 +719,8 @@ export function GameMenu({
 
   if (currentView !== "menu") {
     return (
-      <div className="w-full min-h-screen bg-transparent py-4 sm:py-6 md:py-10 px-3 sm:px-4 md:px-6">
-        <div className="w-full text-black max-w-5xl mx-auto">
+      <div className="w-full min-h-0 flex-1 overflow-y-auto bg-transparent px-2 py-2 sm:px-4 sm:py-3 md:px-6">
+        <div className="mx-auto w-full max-w-5xl text-black">
           {currentView === "flip" && (
             <FlipCardGame
               {...flipCardConfig}
@@ -619,6 +756,38 @@ export function GameMenu({
               onChooseOtherGame={goToMenu}
             />
           )}
+          {currentView === "listen" && (
+            <ListenChooseGame
+              title="Listen & Choose"
+              words={words}
+              audioContext={audioContext}
+              onComplete={(score, maxScore, itemCount) =>
+                onGameComplete?.("listen", score, maxScore, itemCount)
+              }
+              onChooseOtherGame={goToMenu}
+            />
+          )}
+          {currentView === "look" && (
+            <LookChooseGame
+              title="Look & Choose"
+              words={words}
+              onComplete={(score, maxScore, itemCount) =>
+                onGameComplete?.("look", score, maxScore, itemCount)
+              }
+              onChooseOtherGame={goToMenu}
+            />
+          )}
+          {currentView === "catch" && (
+            <CatchingGame
+              title="Catching"
+              words={words}
+              audioContext={audioContext}
+              onComplete={(score, maxScore, itemCount) =>
+                onGameComplete?.("catch", score, maxScore, itemCount)
+              }
+              onChooseOtherGame={goToMenu}
+            />
+          )}
         </div>
       </div>
     );
@@ -629,10 +798,10 @@ export function GameMenu({
   const activeGuide = activeGame ? GAME_GUIDES[activeGame.type] : null;
 
   return (
-    <div className="flex min-h-0 w-full flex-1 flex-col px-3 pt-2 pb-4 sm:px-4 sm:pt-3 md:px-6 md:pt-4 md:pb-6">
-      <div className="mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col">
-        {/* Guide + subtitle stay high */}
-        <div className="relative z-10 mb-2 shrink-0 md:mb-3">
+    <div className="flex min-h-0 w-full flex-1 flex-col overflow-hidden px-2 pt-1 pb-3 sm:px-3 sm:pt-2 md:px-4 md:pb-4">
+      <div className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col overflow-hidden xl:max-w-7xl">
+        {/* Compact guide so 8 cards fit one viewport */}
+        <div className="relative z-20 mb-1 shrink-0 md:mb-2">
           {activeGuide && (
             <MascotGuide
               variant="inline"
@@ -641,30 +810,39 @@ export function GameMenu({
               title={`🗺️ Nora giới thiệu ${activeGuide.title}`}
               message={
                 isLargeScreen
-                  ? `${activeGuide.summary} ${activeGuide.howToPlay} Em hãy chọn thẻ game bên dưới để bắt đầu nhé!`
-                  : `${activeGuide.summary} ${activeGuide.howToPlay} Muốn khám phá thử thách khác, em hãy vuốt hoặc bấm mũi tên nhé!`
+                  ? `${activeGuide.summary} ${activeGuide.howToPlay}`
+                  : `${activeGuide.summary} Vuốt hoặc bấm mũi tên để xem game khác nhé!`
               }
-              className="!mb-2 mx-auto w-full max-w-3xl"
+              className="!mb-1 mx-auto w-full max-w-3xl"
             />
           )}
-          <div className="mt-1 px-2 text-center">
+          <div className="mt-0.5 px-2 text-center">
             {description && (
-              <p className="text-lg font-medium text-black md:text-3xl">
+              <p className="text-base font-medium text-black sm:text-xl md:text-2xl">
                 {description}
               </p>
             )}
           </div>
         </div>
 
-        {/* Cards vertically centered in remaining space */}
-        <div className="flex min-h-0 flex-1 flex-col justify-center">
-        {/* Large screens: all game cards in one row */}
-        <div className="mx-auto hidden w-full px-2 lg:block xl:px-4">
+        {/* Cards fill remaining space only — never overlap guide/header */}
+        <div
+          ref={gridAreaRef}
+          className="flex min-h-0 flex-1 flex-col items-center justify-center overflow-hidden"
+        >
+        {/* Large screens: 4×2 grid so 8 games fit one page */}
+        <div
+          className="mx-auto hidden w-full lg:block"
+          style={{ maxWidth: cardSize.width * 4 + 36 }}
+        >
           {visibleGameCards.length > 0 ? (
             <div
-              className="grid justify-items-center gap-3 xl:gap-5"
+              className="grid justify-items-center gap-3"
               style={{
-                gridTemplateColumns: `repeat(${Math.min(visibleGameCards.length, 5)}, minmax(0, 1fr))`,
+                gridTemplateColumns: `repeat(${Math.min(
+                  visibleGameCards.length > 5 ? 4 : visibleGameCards.length,
+                  4,
+                )}, minmax(0, 1fr))`,
               }}
             >
               {visibleGameCards.map((card) => (
@@ -672,10 +850,10 @@ export function GameMenu({
                   key={card.type}
                   type="button"
                   onClick={() => openGame(card.type)}
-                  className={`group relative w-full cursor-pointer overflow-hidden rounded-[1.75rem] border bg-gradient-to-br text-center shadow-xl ring-2 ring-white/50 transition hover:scale-[1.03] hover:shadow-2xl hover:ring-white/80 xl:rounded-[2rem] ${gameCardSurfaceClass(card)}`}
+                  className={`group relative cursor-pointer overflow-hidden rounded-[1.75rem] border bg-gradient-to-br text-center shadow-xl ring-2 ring-white/50 transition hover:scale-[1.03] hover:shadow-2xl hover:ring-white/80 xl:rounded-[2rem] ${gameCardSurfaceClass(card)}`}
                   style={{
-                    maxWidth: cardSize.width,
-                    aspectRatio: "0.81",
+                    width: cardSize.width,
+                    height: cardSize.height,
                   }}
                   disabled={isPending}
                 >

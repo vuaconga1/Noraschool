@@ -6,6 +6,7 @@ import {
   SeasonCardDecor,
   useForestThemeContextOptional,
 } from "@/app/components/games/forest-background";
+import { GameBackButton } from "@/app/components/games/GameBackButton";
 import { MascotGuide } from "@/app/components/games/MascotGuide";
 import { DEFAULT_ENABLED_GAMES } from "@/types/games";
 import {
@@ -35,7 +36,7 @@ function weekTitle(week: CurriculumWeekTheme): string {
   return `Tuần ${week.weekIndex}`;
 }
 
-export function ThemeWeekCards({ month }: Props) {
+export function ThemeWeekCards({ month, onOpenSidebar }: Props) {
   const router = useRouter();
   const weeks = month.weeks;
   const heading = themeDisplayName(month);
@@ -252,22 +253,45 @@ export function ThemeWeekCards({ month }: Props) {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col bg-transparent">
+      {/* Breadcrumb — desktop only (same style as week game page) */}
+      <div className="relative hidden min-h-[52px] items-center justify-center gap-4 px-6 pt-2 pb-2 md:flex">
+        {onOpenSidebar && (
+          <GameBackButton
+            onClick={onOpenSidebar}
+            className="absolute left-6 top-2 z-20"
+          />
+        )}
+
+        <nav
+          className="inline-flex items-center gap-3 rounded-xl border border-gray-200/80
+                     bg-white/90 px-5 py-3 shadow-md backdrop-blur-sm
+                     transition-all hover:shadow-lg"
+        >
+          {onOpenSidebar ? (
+            <button
+              type="button"
+              onClick={onOpenSidebar}
+              className="text-sm font-semibold text-[#DB2777] transition-colors
+                         hover:text-[#BE185D] sm:text-base"
+            >
+              Chủ đề
+            </button>
+          ) : (
+            <span className="text-sm font-semibold text-[#DB2777] sm:text-base">
+              Chủ đề
+            </span>
+          )}
+          <span className="text-gray-400">/</span>
+          <span className="text-sm font-semibold text-[#BE185D] sm:text-base">
+            {heading}
+          </span>
+        </nav>
+      </div>
+
       <div className="flex min-h-0 flex-1 flex-col px-3 pt-2 pb-4 sm:px-4 sm:pt-3 md:px-6 md:pt-4 md:pb-6">
         {/* Header stays high */}
         <div className="relative z-10 mx-auto mb-2 w-full max-w-7xl shrink-0 md:mb-3">
-          <MascotGuide
-            variant="inline"
-            side="left"
-            dismissible={false}
-            title={`📜 Bản đồ nhiệm vụ: ${weekTitle(activeWeek)}`}
-            message={
-              isLargeScreen
-                ? `Chủ đề “${heading}” có ${weeks.length} tuần · chọn thẻ tuần để bắt đầu ${gameCount} thử thách nhé!`
-                : `Chủ đề “${heading}” có ${activeWeek.words.length} từ vựng tuần này và ${gameCount} thử thách. Vuốt hoặc bấm mũi tên để xem tuần khác, rồi bấm PLAY NOW nhé!`
-            }
-            className="!mb-2 mx-auto w-full max-w-3xl"
-          />
-          <div className="mt-1 px-2 text-center">
+          <div className="px-2 text-center">
             <h1
               className="mb-1 hidden text-3xl font-bold drop-shadow-lg sm:text-4xl md:block lg:text-5xl"
               style={{ textShadow: "0 12px 25px rgba(0,0,0,0.3)", color: headingColor }}
@@ -278,6 +302,18 @@ export function ThemeWeekCards({ month }: Props) {
               Choose week to play game
             </p>
           </div>
+          <MascotGuide
+            variant="inline"
+            side="left"
+            dismissible={false}
+            title={`📜 Bản đồ nhiệm vụ: ${weekTitle(activeWeek)}`}
+            message={
+              isLargeScreen
+                ? `Chủ đề “${heading}” có ${weeks.length} tuần · chọn thẻ tuần để bắt đầu ${gameCount} thử thách nhé!`
+                : `Chủ đề “${heading}” có ${activeWeek.words.length} từ vựng tuần này và ${gameCount} thử thách. Vuốt hoặc bấm mũi tên để xem tuần khác, rồi bấm PLAY NOW nhé!`
+            }
+            className="!mt-2 !mb-2 mx-auto w-full max-w-3xl"
+          />
         </div>
 
         {/* Cards vertically centered in remaining viewport */}

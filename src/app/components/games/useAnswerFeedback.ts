@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { playGameSfx } from "@/app/utils/gameSfx";
 import { pickVoiceSfx } from "@/app/utils/voiceSfx";
+import { stopWordAudio } from "@/app/utils/playWordAudio";
 
 export type AnswerFeedbackType = "correct" | "wrong";
 
@@ -28,9 +29,16 @@ export function useAnswerFeedback(durationMs = DEFAULT_DURATION_MS) {
     };
   }, []);
 
+  /**
+   * Hiện badge + phát lời động viên.
+   * Resolve khi audio kết thúc (và badge đã ẩn nếu duration ngắn hơn audio).
+   */
   const trigger = useCallback(
-    (next: AnswerFeedbackType) => {
-      if (timerRef.current) clearTimeout(timerRef.current);
+    (next: AnswerFeedbackType): Promise<void> => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
       idRef.current += 1;
       const voice = pickVoiceSfx(next, lastVoiceSrcRef.current);
       lastVoiceSrcRef.current = voice.src;
@@ -40,11 +48,24 @@ export function useAnswerFeedback(durationMs = DEFAULT_DURATION_MS) {
         emoji: next === "correct" ? "🌟" : "💪",
         id: idRef.current,
       });
-      playGameSfx(next === "correct" ? "celebration" : "wrong", voice);
-      timerRef.current = setTimeout(() => {
+
+      stopWordAudio();
+      const audioDone = playGameSfx(
+        next === "correct" ? "celebration" : "wrong",
+        voice,
+      );
+
+      const visualDone = new Promise<void>((resolve) => {
+        timerRef.current = setTimeout(() => {
+          setFeedback(null);
+          timerRef.current = null;
+          resolve();
+        }, durationMs);
+      });
+
+      return Promise.all([audioDone, visualDone]).then(() => {
         setFeedback(null);
-        timerRef.current = null;
-      }, durationMs);
+      });
     },
     [durationMs],
   );

@@ -1,4 +1,5 @@
 import type { WordAudioContext, WordItem } from "@/types/games";
+import { stopVoiceSfx } from "@/app/utils/voiceSfx";
 
 type PlayHooks = {
   onStart?: () => void;
@@ -167,6 +168,9 @@ export function playWordAudio(
   hooks?: PlayHooks,
 ): void {
   if (typeof window === "undefined") return;
+
+  // Tránh chồng lời động viên với audio từ vựng.
+  stopVoiceSfx();
 
   const urls = buildCandidateUrls(word, context);
   const spokenText = (word.text || "").trim();

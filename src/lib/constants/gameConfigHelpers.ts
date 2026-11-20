@@ -6,6 +6,9 @@ export const FULL_GAME_KEYS: GameKey[] = [
   "memory",
   "ordering",
   "scramble",
+  "listen",
+  "look",
+  "catch",
 ];
 
 function normalizePart(part: UnitGamePart): UnitGamePart {

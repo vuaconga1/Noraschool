@@ -25,8 +25,15 @@ function normalizeWord(raw: string): string {
   return raw
     .normalize("NFKC")
     .replace(/^review\s*:?\s*/i, "")
+    // Drop age / level notes from Excel cells & filenames
+    .replace(/chỉ dành cho level\s*\d*\s*[-–]?\s*\d*\s*yo?/gi, " ")
+    .replace(/\(?\s*\d\s*[-–]\s*\d\s*yo\s*\)?/gi, " ")
+    .replace(/level\s*\d\s*[-–]\s*\d\s*yo/gi, " ")
+    .replace(/\bchỉ dành cho level\b/gi, " ")
     .replace(/[\u200B-\u200D\uFEFF]/g, "")
-    .replace(/[^\p{L}\p{N}\s'-]/gu, " ")
+    // Treat hyphens/underscores as spaces so "ao-dai.png" matches "ao dai"
+    .replace(/[-_]+/g, " ")
+    .replace(/[^\p{L}\p{N}\s']/gu, " ")
     .trim()
     .toLowerCase()
     .replace(/\s+/g, " ");
@@ -60,6 +67,27 @@ function walkFiles(dir: string, out: string[] = []): string[] {
   return out;
 }
 
+function toPublicRel(file: string): string {
+  if (file.startsWith(path.join(ROOT, "public"))) {
+    return "/" + path.relative(path.join(ROOT, "public"), file).replace(/\\/g, "/");
+  }
+  if (file.startsWith(path.join(ROOT, "frontend/public"))) {
+    return "/" + path.relative(path.join(ROOT, "frontend/public"), file).replace(/\\/g, "/");
+  }
+  return "/" + path.relative(ROOT, file).replace(/\\/g, "/");
+}
+
+/** Prefer curated vocab approved PNGs over pending / misc folders. */
+function imageRank(rel: string): number {
+  const p = rel.toLowerCase().replace(/\\/g, "/");
+  if (p.includes("/assets/vocab/approved/")) return 0;
+  if (p.includes("/assets/vocab/") && !p.includes("/pending/") && !p.includes("/rejected/"))
+    return 1;
+  if (p.includes("/anh_wewin/")) return 2;
+  if (p.includes("/pending/") || p.includes("/rejected/") || p.includes("/temp/")) return 9;
+  return 5;
+}
+
 function buildAssetIndex() {
   const images = new Map<string, string>();
   const audios = new Map<string, string>();
@@ -71,16 +99,11 @@ function buildAssetIndex() {
       const ext = path.extname(file).toLowerCase();
       const stem = normalizeWord(path.basename(file, ext));
       if (!stem) continue;
-      let rel = file;
-      if (file.startsWith(path.join(ROOT, "public"))) {
-        rel = "/" + path.relative(path.join(ROOT, "public"), file).replace(/\\/g, "/");
-      } else if (file.startsWith(path.join(ROOT, "frontend/public"))) {
-        rel = "/" + path.relative(path.join(ROOT, "frontend/public"), file).replace(/\\/g, "/");
-      } else {
-        // Keep absolute-ish repo-relative path for unmatched local folders
-        rel = "/" + path.relative(ROOT, file).replace(/\\/g, "/");
+      const rel = toPublicRel(file);
+      if (imageExt.has(ext)) {
+        const prev = images.get(stem);
+        if (!prev || imageRank(rel) < imageRank(prev)) images.set(stem, rel);
       }
-      if (imageExt.has(ext) && !images.has(stem)) images.set(stem, rel);
       if (audioExt.has(ext) && !audios.has(stem)) audios.set(stem, rel);
     }
   }
@@ -219,6 +242,17 @@ async function main() {
     }
   }
 
+  // Drop orphan vocab rows no longer linked to any week (e.g. old "astronaut 5-6yo")
+  const orphaned = await prisma.vocabItem.findMany({
+    where: { weeks: { none: {} } },
+    select: { id: true, word: true, normalized: true },
+  });
+  if (orphaned.length) {
+    await prisma.vocabItem.deleteMany({
+      where: { id: { in: orphaned.map((o) => o.id) } },
+    });
+  }
+
   const reportPath = path.join(ROOT, "data/curriculum/unmatched-words.txt");
   fs.writeFileSync(
     reportPath,
@@ -227,7 +261,7 @@ async function main() {
   );
 
   console.log(
-    `Imported months=${monthCount}, week-words=${wordCount}, unmatched=${unmatched.size}`,
+    `Imported months=${monthCount}, week-words=${wordCount}, unmatched=${unmatched.size}, orphansRemoved=${orphaned.length}`,
   );
   console.log(`Unmatched report: ${reportPath}`);
 }

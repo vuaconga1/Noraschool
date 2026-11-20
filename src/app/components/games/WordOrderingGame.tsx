@@ -116,7 +116,6 @@ export function WordOrderingGame({
     );
 
     if (isCorrect) {
-      triggerFeedback("correct");
       const pointsEarned = speedTimer.claimScore();
       const nextScore = score + pointsEarned;
       setScore(nextScore);
@@ -126,7 +125,7 @@ export function WordOrderingGame({
       );
       setStatusType("correct");
 
-      setTimeout(() => {
+      void triggerFeedback("correct").then(() => {
         if (currentIndex >= totalRounds - 1) {
           setStatus(
             `🌟 Xuất sắc! Bạn đã hoàn thành tất cả! Tổng điểm: ${nextScore} điểm`,
@@ -134,12 +133,12 @@ export function WordOrderingGame({
           setCompleted(true);
           onComplete?.(nextScore, totalRounds * 100, totalRounds);
         } else {
-          playGameSfx("levelComplete");
+          void playGameSfx("levelComplete");
           setCurrentIndex((prev) => prev + 1);
         }
-      }, 1200);
+      });
     } else {
-      triggerFeedback("wrong");
+      void triggerFeedback("wrong");
       setWrongCount((prev) => prev + 1);
       setStatus(`Ôi, thứ tự chưa đúng. Hãy thử lại nhé! (Tổng: ${score} điểm)`);
       setStatusType("warning");

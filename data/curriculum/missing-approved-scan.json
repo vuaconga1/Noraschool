@@ -1,0 +1,414 @@
+﻿{
+  "totalUniqueWords": 270,
+  "missingApprovedCount": 57,
+  "missingWithAlts": 32,
+  "missingNoAlts": 25,
+  "missingApproved": [
+    {
+      "word": "america",
+      "stem": "america",
+      "approvedPath": "/assets/vocab/approved/america.png",
+      "diskAlts": []
+    },
+    {
+      "word": "bat",
+      "stem": "bat",
+      "approvedPath": "/assets/vocab/approved/bat.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/bat.jpg"
+      ]
+    },
+    {
+      "word": "beetroot",
+      "stem": "beetroot",
+      "approvedPath": "/assets/vocab/approved/beetroot.png",
+      "diskAlts": []
+    },
+    {
+      "word": "bell pepper",
+      "stem": "bell-pepper",
+      "approvedPath": "/assets/vocab/approved/bell-pepper.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/bell pepper.jpg"
+      ]
+    },
+    {
+      "word": "blanket",
+      "stem": "blanket",
+      "approvedPath": "/assets/vocab/approved/blanket.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/blanket.jpg"
+      ]
+    },
+    {
+      "word": "bones",
+      "stem": "bones",
+      "approvedPath": "/assets/vocab/approved/bones.png",
+      "diskAlts": []
+    },
+    {
+      "word": "brain",
+      "stem": "brain",
+      "approvedPath": "/assets/vocab/approved/brain.png",
+      "diskAlts": []
+    },
+    {
+      "word": "can",
+      "stem": "can",
+      "approvedPath": "/assets/vocab/approved/can.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/can.jpg"
+      ]
+    },
+    {
+      "word": "canada",
+      "stem": "canada",
+      "approvedPath": "/assets/vocab/approved/canada.png",
+      "diskAlts": []
+    },
+    {
+      "word": "china",
+      "stem": "china",
+      "approvedPath": "/assets/vocab/approved/china.png",
+      "diskAlts": []
+    },
+    {
+      "word": "corn",
+      "stem": "corn",
+      "approvedPath": "/assets/vocab/approved/corn.png",
+      "diskAlts": []
+    },
+    {
+      "word": "drink",
+      "stem": "drink",
+      "approvedPath": "/assets/vocab/approved/drink.png",
+      "diskAlts": []
+    },
+    {
+      "word": "drive",
+      "stem": "drive",
+      "approvedPath": "/assets/vocab/approved/drive.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/drive.jpg"
+      ]
+    },
+    {
+      "word": "eat",
+      "stem": "eat",
+      "approvedPath": "/assets/vocab/approved/eat.png",
+      "diskAlts": []
+    },
+    {
+      "word": "eggplant",
+      "stem": "eggplant",
+      "approvedPath": "/assets/vocab/approved/eggplant.png",
+      "diskAlts": []
+    },
+    {
+      "word": "england",
+      "stem": "england",
+      "approvedPath": "/assets/vocab/approved/england.png",
+      "diskAlts": []
+    },
+    {
+      "word": "fall",
+      "stem": "fall",
+      "approvedPath": "/assets/vocab/approved/fall.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/fall.jpg"
+      ]
+    },
+    {
+      "word": "france",
+      "stem": "france",
+      "approvedPath": "/assets/vocab/approved/france.png",
+      "diskAlts": []
+    },
+    {
+      "word": "garlic",
+      "stem": "garlic",
+      "approvedPath": "/assets/vocab/approved/garlic.png",
+      "diskAlts": []
+    },
+    {
+      "word": "ginger",
+      "stem": "ginger",
+      "approvedPath": "/assets/vocab/approved/ginger.png",
+      "diskAlts": []
+    },
+    {
+      "word": "glass",
+      "stem": "glass",
+      "approvedPath": "/assets/vocab/approved/glass.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/glass.jpg"
+      ]
+    },
+    {
+      "word": "green onion",
+      "stem": "green-onion",
+      "approvedPath": "/assets/vocab/approved/green-onion.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/green onion.jpg"
+      ]
+    },
+    {
+      "word": "heart",
+      "stem": "heart",
+      "approvedPath": "/assets/vocab/approved/heart.png",
+      "diskAlts": []
+    },
+    {
+      "word": "india",
+      "stem": "india",
+      "approvedPath": "/assets/vocab/approved/india.png",
+      "diskAlts": []
+    },
+    {
+      "word": "italy",
+      "stem": "italy",
+      "approvedPath": "/assets/vocab/approved/italy.png",
+      "diskAlts": []
+    },
+    {
+      "word": "japan",
+      "stem": "japan",
+      "approvedPath": "/assets/vocab/approved/japan.png",
+      "diskAlts": []
+    },
+    {
+      "word": "jingle bell",
+      "stem": "jingle-bell",
+      "approvedPath": "/assets/vocab/approved/jingle-bell.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/jingle bell.jpg"
+      ]
+    },
+    {
+      "word": "kangaroo",
+      "stem": "kangaroo",
+      "approvedPath": "/assets/vocab/approved/kangaroo.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/kangaroo.jpg"
+      ]
+    },
+    {
+      "word": "knees",
+      "stem": "knees",
+      "approvedPath": "/assets/vocab/approved/knees.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/knees.jpg"
+      ]
+    },
+    {
+      "word": "koala",
+      "stem": "koala",
+      "approvedPath": "/assets/vocab/approved/koala.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/koala.jpg"
+      ]
+    },
+    {
+      "word": "korea",
+      "stem": "korea",
+      "approvedPath": "/assets/vocab/approved/korea.png",
+      "diskAlts": []
+    },
+    {
+      "word": "lobster",
+      "stem": "lobster",
+      "approvedPath": "/assets/vocab/approved/lobster.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/lobster.jpg"
+      ]
+    },
+    {
+      "word": "lungs",
+      "stem": "lungs",
+      "approvedPath": "/assets/vocab/approved/lungs.png",
+      "diskAlts": []
+    },
+    {
+      "word": "mom",
+      "stem": "mom",
+      "approvedPath": "/assets/vocab/approved/mom.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/mom.jpg"
+      ]
+    },
+    {
+      "word": "neck",
+      "stem": "neck",
+      "approvedPath": "/assets/vocab/approved/neck.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/neck.jpg"
+      ]
+    },
+    {
+      "word": "police",
+      "stem": "police",
+      "approvedPath": "/assets/vocab/approved/police.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/police.jpg"
+      ]
+    },
+    {
+      "word": "recycle",
+      "stem": "recycle",
+      "approvedPath": "/assets/vocab/approved/recycle.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/recycle.jpg"
+      ]
+    },
+    {
+      "word": "rocket",
+      "stem": "rocket",
+      "approvedPath": "/assets/vocab/approved/rocket.png",
+      "diskAlts": [
+        "anh_wewin/kids/unit 10/Transportation (Week 1-2)/rocket.png"
+      ]
+    },
+    {
+      "word": "root",
+      "stem": "root",
+      "approvedPath": "/assets/vocab/approved/root.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/root.jpg"
+      ]
+    },
+    {
+      "word": "roots",
+      "stem": "roots",
+      "approvedPath": "/assets/vocab/approved/roots.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/roots.jpg"
+      ]
+    },
+    {
+      "word": "russia",
+      "stem": "russia",
+      "approvedPath": "/assets/vocab/approved/russia.png",
+      "diskAlts": []
+    },
+    {
+      "word": "santa",
+      "stem": "santa",
+      "approvedPath": "/assets/vocab/approved/santa.png",
+      "diskAlts": []
+    },
+    {
+      "word": "sea horse",
+      "stem": "sea-horse",
+      "approvedPath": "/assets/vocab/approved/sea-horse.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/sea horse.jpg"
+      ]
+    },
+    {
+      "word": "shark",
+      "stem": "shark",
+      "approvedPath": "/assets/vocab/approved/shark.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/shark.jpg"
+      ]
+    },
+    {
+      "word": "shoulders",
+      "stem": "shoulders",
+      "approvedPath": "/assets/vocab/approved/shoulders.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/shoulders.jpg"
+      ]
+    },
+    {
+      "word": "skin",
+      "stem": "skin",
+      "approvedPath": "/assets/vocab/approved/skin.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/skin.jpg"
+      ]
+    },
+    {
+      "word": "snowball",
+      "stem": "snowball",
+      "approvedPath": "/assets/vocab/approved/snowball.png",
+      "diskAlts": []
+    },
+    {
+      "word": "squid",
+      "stem": "squid",
+      "approvedPath": "/assets/vocab/approved/squid.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/squid.jpg"
+      ]
+    },
+    {
+      "word": "stem",
+      "stem": "stem",
+      "approvedPath": "/assets/vocab/approved/stem.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/stem.jpg"
+      ]
+    },
+    {
+      "word": "stomach",
+      "stem": "stomach",
+      "approvedPath": "/assets/vocab/approved/stomach.png",
+      "diskAlts": []
+    },
+    {
+      "word": "toes",
+      "stem": "toes",
+      "approvedPath": "/assets/vocab/approved/toes.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/toes.jpg"
+      ]
+    },
+    {
+      "word": "trash",
+      "stem": "trash",
+      "approvedPath": "/assets/vocab/approved/trash.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/trash.jpg"
+      ]
+    },
+    {
+      "word": "tulip",
+      "stem": "tulip",
+      "approvedPath": "/assets/vocab/approved/tulip.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/tulip.jpg"
+      ]
+    },
+    {
+      "word": "vietnam",
+      "stem": "vietnam",
+      "approvedPath": "/assets/vocab/approved/vietnam.png",
+      "diskAlts": []
+    },
+    {
+      "word": "water buffalo",
+      "stem": "water-buffalo",
+      "approvedPath": "/assets/vocab/approved/water-buffalo.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/water buffalo.jpg"
+      ]
+    },
+    {
+      "word": "whale",
+      "stem": "whale",
+      "approvedPath": "/assets/vocab/approved/whale.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/whale.jpg"
+      ]
+    },
+    {
+      "word": "zodiac rat",
+      "stem": "zodiac-rat",
+      "approvedPath": "/assets/vocab/approved/zodiac-rat.png",
+      "diskAlts": [
+        "anh_wewin/curriculum/from-anschool/zodiac rat.jpg"
+      ]
+    }
+  ]
+}

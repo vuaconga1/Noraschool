@@ -21,6 +21,9 @@ const GAME_META: Record<GameKey, { icon: string; label: string }> = {
   memory: { icon: "🧠", label: "Memory Game" },
   ordering: { icon: "🔤", label: "Word Ordering Game" },
   scramble: { icon: "🧩", label: "Word Scramble Game" },
+  listen: { icon: "🎧", label: "Listen & Choose" },
+  look: { icon: "👀", label: "Look & Choose" },
+  catch: { icon: "🧺", label: "Catching" },
 };
 
 export function UnitProgress({

@@ -54,9 +54,17 @@ export function SeasonGamePanel({
     game in GAME_GUIDES ? GAME_GUIDES[game as GameKey] : null;
 
   return (
-    <section className="min-h-screen bg-transparent py-4 md:py-8 lg:py-10 px-1 md:px-4 lg:px-6">
+    <section
+      className={`bg-transparent px-1 md:px-4 lg:px-6 ${
+        className.includes("compact-fit")
+          ? "py-2 md:py-3"
+          : "min-h-screen py-4 md:py-8 lg:py-10"
+      }`}
+    >
       <div
-        className={`rounded-xl md:rounded-2xl border p-3 md:p-6 mx-auto ${MAX_W[maxWidth]} ${ui.panel} ${ui.panelBorder} ${ui.panelShadow} ${className}`}
+        className={`rounded-xl md:rounded-2xl border mx-auto ${MAX_W[maxWidth]} ${ui.panel} ${ui.panelBorder} ${ui.panelShadow} ${className} ${
+          className.includes("compact-fit") ? "p-2.5 md:p-4" : "p-3 md:p-6"
+        }`}
       >
         {showMascot && gameplayGuide && (
           <MascotGuide

@@ -1,0 +1,500 @@
+{
+  "generatedAt": "2026-11-20 12:04:08",
+  "totals": {
+    "vocabItems": 270,
+    "diskImages": 2098,
+    "diskAudios": 1283,
+    "ok": 211,
+    "missingImage": 0,
+    "missingAudio": 59,
+    "missingBoth": 0,
+    "missingImageOnly": 0,
+    "missingAudioOnly": 59,
+    "brokenImage": 0,
+    "brokenAudio": 0,
+    "wrongImageMapping": 0,
+    "rematchImageHints": 0,
+    "rematchAudioHints": 0
+  },
+  "wrongImageMapping": [],
+  "brokenImage": [],
+  "brokenAudio": [],
+  "missingBoth": [],
+  "missingImageOnly": [],
+  "missingAudioOnly": [
+    {
+      "word": "air",
+      "normalized": "air",
+      "meaning": null,
+      "context": "Environment Protection W3; Environment Protection W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "angle",
+      "normalized": "angle",
+      "meaning": null,
+      "context": "Self-discovery W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "ao dai",
+      "normalized": "ao dai",
+      "meaning": null,
+      "context": "Our country - The World W1; Our country - The World W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "bamboo",
+      "normalized": "bamboo",
+      "meaning": null,
+      "context": "Our country - The World W1; Our country - The World W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "barbecue",
+      "normalized": "barbecue",
+      "meaning": null,
+      "context": "Our country - The World W3; Our country - The World W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "be quiet",
+      "normalized": "be quiet",
+      "meaning": null,
+      "context": "New Schoolyear W1",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "ben thanh market",
+      "normalized": "ben thanh market",
+      "meaning": null,
+      "context": "Our country - The World W1; Our country - The World W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "black cat",
+      "normalized": "black cat",
+      "meaning": null,
+      "context": "Self-discovery W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "boomerang",
+      "normalized": "boomerang",
+      "meaning": null,
+      "context": "Our country - The World W3; Our country - The World W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "city",
+      "normalized": "city",
+      "meaning": null,
+      "context": "Around the world W3; Around the world W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "conical hat",
+      "normalized": "conical hat",
+      "meaning": null,
+      "context": "Our country - The World W1; Our country - The World W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "cowboy",
+      "normalized": "cowboy",
+      "meaning": null,
+      "context": "Self-discovery W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "custard apple",
+      "normalized": "custard apple",
+      "meaning": null,
+      "context": "Traditional New Year W1; Traditional New Year W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "daughter",
+      "normalized": "daughter",
+      "meaning": null,
+      "context": "Family W3; Family W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "driver",
+      "normalized": "driver",
+      "meaning": null,
+      "context": "Career W1; Career W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "fist bump",
+      "normalized": "fist bump",
+      "meaning": null,
+      "context": "New Schoolyear W1",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "go straight",
+      "normalized": "go straight",
+      "meaning": null,
+      "context": "Transportation W3; Transportation W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "granddaughter",
+      "normalized": "granddaughter",
+      "meaning": null,
+      "context": "Family W3; Family W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "grandson",
+      "normalized": "grandson",
+      "meaning": null,
+      "context": "Family W3; Family W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "ha noi",
+      "normalized": "ha noi",
+      "meaning": null,
+      "context": "Our country - The World W1; Our country - The World W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "hello",
+      "normalized": "hello",
+      "meaning": null,
+      "context": "New Schoolyear W1",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "helmet",
+      "normalized": "helmet",
+      "meaning": null,
+      "context": "Transportation W3; Transportation W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "high five",
+      "normalized": "high five",
+      "meaning": null,
+      "context": "New Schoolyear W1",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "husband",
+      "normalized": "husband",
+      "meaning": null,
+      "context": "Family W3; Family W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "listen",
+      "normalized": "listen",
+      "meaning": null,
+      "context": "Transportation W3; Transportation W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "listen to your teacher",
+      "normalized": "listen to your teacher",
+      "meaning": null,
+      "context": "New Schoolyear W1",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "look",
+      "normalized": "look",
+      "meaning": null,
+      "context": "Transportation W3; Transportation W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "look at the teacher",
+      "normalized": "look at the teacher",
+      "meaning": null,
+      "context": "New Schoolyear W1",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "meat pie",
+      "normalized": "meat pie",
+      "meaning": null,
+      "context": "Our country - The World W3; Our country - The World W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "mid autumn day",
+      "normalized": "mid autumn day",
+      "meaning": null,
+      "context": "New Schoolyear W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "no fighting",
+      "normalized": "no fighting",
+      "meaning": null,
+      "context": "New Schoolyear W1",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "no running",
+      "normalized": "no running",
+      "meaning": null,
+      "context": "New Schoolyear W1",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "palace",
+      "normalized": "palace",
+      "meaning": null,
+      "context": "Around the world W3; Around the world W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "parents",
+      "normalized": "parents",
+      "meaning": null,
+      "context": "Family W3; Family W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "pho",
+      "normalized": "pho",
+      "meaning": null,
+      "context": "Our country - The World W1; Our country - The World W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "pirate",
+      "normalized": "pirate",
+      "meaning": null,
+      "context": "Self-discovery W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "pumkin",
+      "normalized": "pumkin",
+      "meaning": null,
+      "context": "Self-discovery W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "pyramid",
+      "normalized": "pyramid",
+      "meaning": null,
+      "context": "Around the world W3; Around the world W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "raise your hand",
+      "normalized": "raise your hand",
+      "meaning": null,
+      "context": "New Schoolyear W1",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "rocket",
+      "normalized": "rocket",
+      "meaning": null,
+      "context": "Transportation W2; Transportation W1",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "seed",
+      "normalized": "seed",
+      "meaning": null,
+      "context": "Environment Protection W3; Environment Protection W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "sidewalk",
+      "normalized": "sidewalk",
+      "meaning": null,
+      "context": "Transportation W3; Transportation W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "sit nicely",
+      "normalized": "sit nicely",
+      "meaning": null,
+      "context": "New Schoolyear W1",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "sled",
+      "normalized": "sled",
+      "meaning": null,
+      "context": "Winter - Christmas W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "snow",
+      "normalized": "snow",
+      "meaning": null,
+      "context": "Winter - Christmas W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "snowflake",
+      "normalized": "snowflake",
+      "meaning": null,
+      "context": "Winter - Christmas W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "son",
+      "normalized": "son",
+      "meaning": null,
+      "context": "Family W3; Family W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "statue",
+      "normalized": "statue",
+      "meaning": null,
+      "context": "Around the world W3; Around the world W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "stop",
+      "normalized": "stop",
+      "meaning": null,
+      "context": "Transportation W3; Transportation W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "superhero",
+      "normalized": "superhero",
+      "meaning": null,
+      "context": "Self-discovery W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "sydney opera house",
+      "normalized": "sydney opera house",
+      "meaning": null,
+      "context": "Our country - The World W3; Our country - The World W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "teeth",
+      "normalized": "teeth",
+      "meaning": null,
+      "context": "Self-discovery W3",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "temple",
+      "normalized": "temple",
+      "meaning": null,
+      "context": "Around the world W3; Around the world W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "tet holiday papaya",
+      "normalized": "tet holiday papaya",
+      "meaning": null,
+      "context": "Traditional New Year W2",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "turn left",
+      "normalized": "turn left",
+      "meaning": null,
+      "context": "Transportation W3; Transportation W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "turn right",
+      "normalized": "turn right",
+      "meaning": null,
+      "context": "Transportation W3; Transportation W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "vegemite",
+      "normalized": "vegemite",
+      "meaning": null,
+      "context": "Our country - The World W3; Our country - The World W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "wait",
+      "normalized": "wait",
+      "meaning": null,
+      "context": "Transportation W3; Transportation W4",
+      "dbPath": null,
+      "diskCandidate": null
+    },
+    {
+      "word": "wife",
+      "normalized": "wife",
+      "meaning": null,
+      "context": "Family W3; Family W4",
+      "dbPath": null,
+      "diskCandidate": null
+    }
+  ],
+  "rematchImageHints": [],
+  "rematchAudioHints": []
+}

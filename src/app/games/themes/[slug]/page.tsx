@@ -54,7 +54,10 @@ export default function ThemeMonthPage() {
             title={themeDisplayName(month)}
             subtitle="Chọn tuần học"
           />
-          <ThemeWeekCards month={month} />
+          <ThemeWeekCards
+            month={month}
+            onOpenSidebar={() => setSidebarOpen(true)}
+          />
         </div>
       </div>
     </ForestPageShell>

@@ -70,7 +70,10 @@ export type GameKey =
   | "speak"
   | "memory"
   | "ordering"
-  | "scramble";
+  | "scramble"
+  | "listen"
+  | "look"
+  | "catch";
 
 export const DEFAULT_ENABLED_GAMES: GameKey[] = [
   "flip",
@@ -78,6 +81,9 @@ export const DEFAULT_ENABLED_GAMES: GameKey[] = [
   "memory",
   "ordering",
   "scramble",
+  "listen",
+  "look",
+  "catch",
 ];
 
 export type UnitGamePart = {

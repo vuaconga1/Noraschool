@@ -255,19 +255,7 @@ export function ThemeWeekCards({ month }: Props) {
       <div className="flex min-h-0 flex-1 flex-col px-3 pt-2 pb-4 sm:px-4 sm:pt-3 md:px-6 md:pt-4 md:pb-6">
         {/* Header stays high */}
         <div className="relative z-10 mx-auto mb-2 w-full max-w-7xl shrink-0 md:mb-3">
-          <MascotGuide
-            variant="inline"
-            side="left"
-            dismissible={false}
-            title={`📜 Bản đồ nhiệm vụ: ${weekTitle(activeWeek)}`}
-            message={
-              isLargeScreen
-                ? `Chủ đề “${heading}” có ${weeks.length} tuần · chọn thẻ tuần để bắt đầu ${gameCount} thử thách nhé!`
-                : `Chủ đề “${heading}” có ${activeWeek.words.length} từ vựng tuần này và ${gameCount} thử thách. Vuốt hoặc bấm mũi tên để xem tuần khác, rồi bấm PLAY NOW nhé!`
-            }
-            className="!mb-2 mx-auto w-full max-w-3xl"
-          />
-          <div className="mt-1 px-2 text-center">
+          <div className="px-2 text-center">
             <h1
               className="mb-1 hidden text-3xl font-bold drop-shadow-lg sm:text-4xl md:block lg:text-5xl"
               style={{ textShadow: "0 12px 25px rgba(0,0,0,0.3)", color: headingColor }}
@@ -278,6 +266,18 @@ export function ThemeWeekCards({ month }: Props) {
               Choose week to play game
             </p>
           </div>
+          <MascotGuide
+            variant="inline"
+            side="left"
+            dismissible={false}
+            title={`📜 Bản đồ nhiệm vụ: ${weekTitle(activeWeek)}`}
+            message={
+              isLargeScreen
+                ? `Chủ đề “${heading}” có ${weeks.length} tuần · chọn thẻ tuần để bắt đầu ${gameCount} thử thách nhé!`
+                : `Chủ đề “${heading}” có ${activeWeek.words.length} từ vựng tuần này và ${gameCount} thử thách. Vuốt hoặc bấm mũi tên để xem tuần khác, rồi bấm PLAY NOW nhé!`
+            }
+            className="!mt-2 !mb-2 mx-auto w-full max-w-3xl"
+          />
         </div>
 
         {/* Cards vertically centered in remaining viewport */}

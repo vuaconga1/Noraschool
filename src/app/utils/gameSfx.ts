@@ -12,7 +12,8 @@ export type GameSfxType =
   | "celebration"
   | "levelComplete"
   | "gameComplete"
-  | "popupOpen";
+  | "popupOpen"
+  | "ting";
 
 type ToneOpts = {
   frequency: number;
@@ -179,6 +180,44 @@ function playPopupOpen(ctx: AudioContext, now: number, scale: number) {
   playTone(ctx, { frequency: 987.77, start: now + 0.06, duration: 0.14, volume: 0.12, type: "triangle" }, scale);
 }
 
+/** Tiếng "ting" ngắn khi hứng / nhận điểm — sáng, rõ, không đè lời nói. */
+function playTing(ctx: AudioContext, now: number, scale: number) {
+  playTone(
+    ctx,
+    {
+      frequency: 1320,
+      freqEnd: 1980,
+      start: now,
+      duration: 0.07,
+      volume: 0.2,
+      type: "sine",
+    },
+    scale,
+  );
+  playTone(
+    ctx,
+    {
+      frequency: 1760,
+      start: now + 0.02,
+      duration: 0.14,
+      volume: 0.16,
+      type: "triangle",
+    },
+    scale,
+  );
+  playTone(
+    ctx,
+    {
+      frequency: 2349,
+      start: now + 0.04,
+      duration: 0.1,
+      volume: 0.08,
+      type: "sine",
+    },
+    scale,
+  );
+}
+
 const PLAYERS: Record<GameSfxType, PlayerFn> = {
   correct: playCorrect,
   wrong: playWrong,
@@ -186,32 +225,52 @@ const PLAYERS: Record<GameSfxType, PlayerFn> = {
   levelComplete: playLevelComplete,
   gameComplete: playGameComplete,
   popupOpen: playPopupOpen,
+  ting: playTing,
 };
 
-/** Phát hiệu ứng âm thanh game. Im lặng nếu trình duyệt chặn AudioContext. */
-export function playGameSfx(type: GameSfxType, voice?: VoiceSfxOption) {
+/** Ước lượng độ dài ambient SFX (giây) — dùng khi cần chờ trước bước tiếp theo. */
+const AMBIENT_DURATION_SEC: Partial<Record<GameSfxType, number>> = {
+  levelComplete: 0.45,
+  gameComplete: 1.1,
+  popupOpen: 0.25,
+  celebration: 0.5,
+  ting: 0.2,
+};
+
+/**
+ * Phát hiệu ứng âm thanh game. Im lặng nếu trình duyệt chặn AudioContext.
+ * Trả về Promise resolve khi clip/voice kết thúc — dùng để chờ trước câu tiếp theo.
+ */
+export function playGameSfx(
+  type: GameSfxType,
+  voice?: VoiceSfxOption,
+): Promise<void> {
   // Lời động viên có mục âm lượng riêng, không phụ thuộc thanh "Hiệu ứng".
   if (type === "celebration" || type === "correct") {
-    playVoiceSfx("correct", voice);
-    return;
+    return playVoiceSfx("correct", voice);
   }
 
   if (type === "wrong") {
-    playVoiceSfx("wrong", voice);
-    return;
+    return playVoiceSfx("wrong", voice);
   }
 
-  if (!ambientGameSfxEnabled) return;
+  if (!ambientGameSfxEnabled) return Promise.resolve();
 
   const sfxScale = getSfxVolumeMultiplier();
-  if (sfxScale <= 0) return;
+  if (sfxScale <= 0) return Promise.resolve();
 
   const ctx = getContext();
-  if (!ctx) return;
+  if (!ctx) return Promise.resolve();
 
   try {
     PLAYERS[type](ctx, ctx.currentTime, sfxScale);
   } catch {
     // Autoplay policy / unsupported
+    return Promise.resolve();
   }
+
+  const waitMs = Math.ceil((AMBIENT_DURATION_SEC[type] ?? 0.3) * 1000);
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, waitMs);
+  });
 }

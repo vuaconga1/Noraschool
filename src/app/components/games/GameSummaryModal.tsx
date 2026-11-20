@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   useGameSeasonTheme,
   type SeasonGameType,
@@ -29,6 +30,11 @@ export function GameSummaryModal({
   onChooseOtherGame,
 }: GameSummaryModalProps) {
   const { ui } = useGameSeasonTheme(game);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -37,7 +43,16 @@ export function GameSummaryModal({
     return () => window.clearTimeout(fanfare);
   }, [open]);
 
-  if (!open) return null;
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  if (!open || !mounted) return null;
 
   const primaryBtn =
     ui.primaryBtn ||
@@ -46,31 +61,45 @@ export function GameSummaryModal({
     ui.secondaryBtn ||
     "border-4 border-blue-100 bg-white text-blue-600 hover:border-blue-300 hover:bg-blue-50";
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 px-4 py-6 backdrop-blur-sm">
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[200] flex items-center justify-center overflow-y-auto overscroll-contain bg-slate-900/45 px-3 py-4 backdrop-blur-sm sm:px-4 sm:py-6"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="game-summary-title"
+    >
       <section
-        className={`relative w-full max-w-2xl overflow-hidden rounded-[36px] border p-6 text-center shadow-2xl sm:rounded-[48px] sm:p-10 ${ui.panel} ${ui.panelBorder}`}
+        className={`relative my-auto w-full max-w-2xl max-h-[min(92dvh,920px)] overflow-y-auto rounded-[28px] border p-5 text-center shadow-2xl sm:rounded-[40px] sm:p-8 ${ui.panel} ${ui.panelBorder}`}
       >
-        <h2 className={`mb-4 text-3xl font-black uppercase sm:text-4xl md:text-5xl ${ui.heading}`}>
+        <h2
+          id="game-summary-title"
+          className={`mb-2 text-2xl font-black uppercase sm:mb-3 sm:text-4xl md:text-5xl ${ui.heading}`}
+        >
           Chúc mừng bé!
         </h2>
-        <p className={`mb-8 text-lg font-bold sm:text-xl ${ui.subtext}`}>
+        <p className={`mb-5 text-base font-bold sm:mb-6 sm:text-xl ${ui.subtext}`}>
           Bé đã hoàn thành xuất sắc trò chơi 🏆
         </p>
 
         <div
-          className={`mx-auto mb-8 max-w-sm rounded-3xl border-4 p-6 shadow-inner ${ui.statBg} ${ui.panelBorder}`}
+          className={`mx-auto mb-5 max-w-sm rounded-3xl border-4 p-4 shadow-inner sm:mb-6 sm:p-6 ${ui.statBg} ${ui.panelBorder}`}
         >
-          <div className={`mb-2 text-5xl font-black drop-shadow-md sm:text-7xl ${ui.heading}`}>
+          <div
+            className={`mb-1 text-4xl font-black drop-shadow-md sm:mb-2 sm:text-6xl md:text-7xl ${ui.heading}`}
+          >
             {score}
           </div>
-          <div className={`text-sm font-bold uppercase tracking-wide sm:text-base ${ui.label}`}>
+          <div
+            className={`text-sm font-bold uppercase tracking-wide sm:text-base ${ui.label}`}
+          >
             Điểm Khám Phá
           </div>
         </div>
 
-        <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 font-bold shadow-sm sm:px-6 sm:text-lg ${ui.statusSuccess}`}>
+        <div className="mb-6 grid grid-cols-1 gap-3 sm:mb-8 sm:grid-cols-3 sm:gap-4">
+          <div
+            className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 font-bold shadow-sm sm:px-6 sm:text-lg ${ui.statusSuccess}`}
+          >
             <span className="text-xl">✅</span>
             <span>{correctCount}</span>
             <span>Đúng</span>
@@ -80,31 +109,38 @@ export function GameSummaryModal({
             <span>{wrongCount}</span>
             <span>Sai</span>
           </div>
-          <div className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 font-bold shadow-sm sm:px-6 sm:text-lg ${ui.statusInfo}`}>
+          <div
+            className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 font-bold shadow-sm sm:px-6 sm:text-lg ${ui.statusInfo}`}
+          >
             <span className="text-xl">🎯</span>
             <span>{totalCount}</span>
             <span>Câu</span>
           </div>
         </div>
 
-        <div className={`grid gap-4 ${onChooseOtherGame ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"}`}>
+        <div
+          className={`grid gap-3 sm:gap-4 ${onChooseOtherGame ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"}`}
+        >
           <button
+            type="button"
             onClick={onPlayAgain}
-            className={`flex items-center justify-center gap-2 rounded-[24px] px-6 py-4 text-lg font-black transition-all hover:-translate-y-1 active:scale-95 sm:text-xl ${primaryBtn}`}
+            className={`flex items-center justify-center gap-2 rounded-[24px] px-6 py-3.5 text-lg font-black transition-all hover:-translate-y-1 active:scale-95 sm:py-4 sm:text-xl ${primaryBtn}`}
           >
             🔄 Chơi lại nhé
           </button>
 
           {onChooseOtherGame && (
             <button
+              type="button"
               onClick={onChooseOtherGame}
-              className={`flex items-center justify-center gap-2 rounded-[24px] px-6 py-4 text-lg font-black shadow-lg transition-all active:scale-95 sm:text-xl ${secondaryBtn}`}
+              className={`flex items-center justify-center gap-2 rounded-[24px] px-6 py-3.5 text-lg font-black shadow-lg transition-all active:scale-95 sm:py-4 sm:text-xl ${secondaryBtn}`}
             >
               🎮 Chọn Game Khác
             </button>
           )}
         </div>
       </section>
-    </div>
+    </div>,
+    document.body,
   );
 }

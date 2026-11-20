@@ -13,15 +13,41 @@ import { useAuthStore } from "@/stores/auth.store";
 import { PERMISSIONS } from "@/lib/constants/permission";
 import { isFullscreenGameRoute } from "@/lib/constants/routes";
 
+/** Management routes already render the pink ManagementSidebar — skip the blue one. */
+function isManagementRoute(pathname: string): boolean {
+  return (
+    pathname === "/dashboard" ||
+    pathname.startsWith("/dashboard/") ||
+    pathname === "/class" ||
+    pathname.startsWith("/class/") ||
+    pathname === "/user" ||
+    pathname.startsWith("/user/") ||
+    pathname === "/student" ||
+    pathname.startsWith("/student/") ||
+    pathname === "/storage" ||
+    pathname.startsWith("/storage/") ||
+    pathname === "/vocabulary" ||
+    pathname.startsWith("/vocabulary/") ||
+    pathname === "/vocab-images" ||
+    pathname.startsWith("/vocab-images/") ||
+    pathname === "/game-units" ||
+    pathname.startsWith("/game-units/")
+  );
+}
+
 function AppChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isGamePage = isFullscreenGameRoute(pathname);
+  const onManagement = isManagementRoute(pathname);
 
   const hasPermission = useAuthStore((s) => s.hasPermission);
   const user = useAuthStore((s) => s.user);
 
+  // Blue legacy sidebar only outside management (pink sidebar owns that area).
   const canViewSidebar =
-    !!user && hasPermission(PERMISSIONS.SIDEBAR_MANAGEMENT);
+    !!user &&
+    hasPermission(PERMISSIONS.SIDEBAR_MANAGEMENT) &&
+    !onManagement;
 
   if (isGamePage) {
     return (

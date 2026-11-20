@@ -30,6 +30,7 @@ const VOICE_OPTIONS: Record<VoiceSfxType, readonly VoiceSfxOption[]> = {
 };
 
 let activeVoice: HTMLAudioElement | null = null;
+let activeResolve: (() => void) | null = null;
 let lastPlayedSrc: string | null = null;
 
 export function pickVoiceSfx(
@@ -43,10 +44,21 @@ export function pickVoiceSfx(
   return candidates[Math.floor(Math.random() * candidates.length)] ?? pool[0];
 }
 
+function settleActiveVoice() {
+  const resolve = activeResolve;
+  activeResolve = null;
+  resolve?.();
+}
+
 export function stopVoiceSfx() {
-  if (!activeVoice) return;
+  if (!activeVoice) {
+    settleActiveVoice();
+    return;
+  }
   const audio = activeVoice;
   activeVoice = null;
+  audio.onended = null;
+  audio.onerror = null;
   audio.muted = true;
   audio.volume = 0;
   audio.pause();
@@ -57,23 +69,50 @@ export function stopVoiceSfx() {
   }
   audio.removeAttribute("src");
   audio.src = "";
-  audio.load();
+  try {
+    audio.load();
+  } catch {
+    // ignore
+  }
+  settleActiveVoice();
 }
 
-/** Phát ngẫu nhiên lời động viên tiếng Anh cho câu trả lời đúng hoặc sai. */
-export function playVoiceSfx(type: VoiceSfxType, selected?: VoiceSfxOption) {
+/**
+ * Phát ngẫu nhiên lời động viên tiếng Anh cho câu trả lời đúng hoặc sai.
+ * Resolve khi clip kết thúc (hoặc lỗi / bị dừng).
+ */
+export function playVoiceSfx(
+  type: VoiceSfxType,
+  selected?: VoiceSfxOption,
+): Promise<void> {
   const volume = getVoiceVolumeMultiplier();
-  if (volume <= 0 || typeof window === "undefined") return;
-
-  if (activeVoice) {
-    activeVoice.pause();
-    activeVoice.currentTime = 0;
+  if (volume <= 0 || typeof window === "undefined") {
+    return Promise.resolve();
   }
 
-  const option = selected ?? pickVoiceSfx(type);
-  const audio = new Audio(option.src);
-  audio.volume = volume;
-  activeVoice = audio;
-  lastPlayedSrc = option.src;
-  void audio.play().catch(() => {});
+  stopVoiceSfx();
+
+  return new Promise((resolve) => {
+    const option = selected ?? pickVoiceSfx(type);
+    const audio = new Audio(option.src);
+    audio.volume = volume;
+    activeVoice = audio;
+    activeResolve = resolve;
+    lastPlayedSrc = option.src;
+
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      audio.onended = null;
+      audio.onerror = null;
+      if (activeVoice === audio) activeVoice = null;
+      if (activeResolve === resolve) activeResolve = null;
+      resolve();
+    };
+
+    audio.onended = finish;
+    audio.onerror = finish;
+    void audio.play().then(undefined, finish);
+  });
 }

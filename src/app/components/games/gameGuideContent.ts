@@ -37,6 +37,21 @@ export const GAME_GUIDES: Record<GameKey, GameGuide> = {
     summary: "Các chữ cái đã bị thổi bay lộn xộn rồi!",
     howToPlay: "Nhìn hình và nghĩa, ghép lại chữ cái rồi nhập từ tiếng Anh đúng nhé.",
   },
+  listen: {
+    title: "Listen & Choose",
+    summary: "Tai đang lắng nghe thật kỹ!",
+    howToPlay: "Bấm loa để nghe từ, rồi chọn đúng hình trong 4 lựa chọn nhé.",
+  },
+  look: {
+    title: "Look & Choose",
+    summary: "Hình ảnh đang chờ em gọi tên!",
+    howToPlay: "Nhìn hình rồi chọn từ tiếng Anh đúng trong các đáp án nhé.",
+  },
+  catch: {
+    title: "Catching",
+    summary: "Từ vựng đang rơi từ trời xuống!",
+    howToPlay: "Di chuyển giỏ để hứng hình từ vựng. Càng hứng nhiều càng nhiều điểm!",
+  },
 };
 
 export const LEVEL_LIBRARY_GUIDE = {

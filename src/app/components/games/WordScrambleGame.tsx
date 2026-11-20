@@ -86,7 +86,6 @@ export function WordScrambleGame({
     const correctAnswer = currentWord.text.toLowerCase();
 
     if (userAnswer === correctAnswer) {
-      triggerFeedback("correct");
       const pointsEarned = speedTimer.claimScore();
       const nextScore = score + pointsEarned;
       setScore(nextScore);
@@ -96,7 +95,7 @@ export function WordScrambleGame({
       );
       setStatusType("correct");
 
-      setTimeout(() => {
+      void triggerFeedback("correct").then(() => {
         if (currentIndex >= playWords.length - 1) {
           setStatus(
             `🌟 Xuất sắc! Bạn đã hoàn thành tất cả các từ! Tổng điểm: ${nextScore} điểm`,
@@ -104,15 +103,15 @@ export function WordScrambleGame({
           setCompleted(true);
           onComplete?.(nextScore, playWords.length * 100, playWords.length);
         } else {
-          playGameSfx("levelComplete");
+          void playGameSfx("levelComplete");
           setCurrentIndex((prev) => prev + 1);
           setUserInput("");
           setStatus("Sắp xếp các chữ cái để tạo thành từ đúng!");
           setStatusType("info");
         }
-      }, 1500);
+      });
     } else {
-      triggerFeedback("wrong");
+      void triggerFeedback("wrong");
       setWrongCount((prev) => prev + 1);
       setStatus(`Ôi, chưa đúng đâu. Hãy thử lại nhé! (Tổng: ${score} điểm)`);
       setStatusType("warning");
