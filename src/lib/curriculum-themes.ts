@@ -19,7 +19,18 @@ export type CurriculumMonthTheme = {
   weeks: CurriculumWeekTheme[];
 };
 
-export const CURRICULUM_MONTHS = themesJson as CurriculumMonthTheme[];
+/** Full curriculum JSON — keep for later unlocks / import scripts. */
+const ALL_CURRICULUM_MONTHS = themesJson as CurriculumMonthTheme[];
+
+/**
+ * Public themes shown in UI. Only New Schoolyear is live for now;
+ * other months stay in JSON so they can be re-enabled by slug.
+ */
+const VISIBLE_THEME_SLUGS = new Set(["2026-09"]);
+
+export const CURRICULUM_MONTHS = ALL_CURRICULUM_MONTHS.filter((m) =>
+  VISIBLE_THEME_SLUGS.has(m.slug),
+);
 
 const VI_MONTHS = [
   "Tháng 1",
