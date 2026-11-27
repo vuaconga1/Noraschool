@@ -9,6 +9,13 @@ export type CurriculumWeekTheme = {
   words: string[];
 };
 
+export type CurriculumAgeBand = {
+  id: string;
+  labelVi: string;
+  labelEn: string;
+  weeks: CurriculumWeekTheme[];
+};
+
 export type CurriculumMonthTheme = {
   slug: string;
   year: number;
@@ -17,20 +24,27 @@ export type CurriculumMonthTheme = {
   titleEn: string;
   topicPlan: string | null;
   weeks: CurriculumWeekTheme[];
+  ageBands?: CurriculumAgeBand[];
 };
 
 /** Full curriculum JSON — keep for later unlocks / import scripts. */
 const ALL_CURRICULUM_MONTHS = themesJson as CurriculumMonthTheme[];
 
 /**
- * Public themes shown in UI. Only New Schoolyear is live for now;
+ * Public themes shown in UI. Only Career is live for now;
  * other months stay in JSON so they can be re-enabled by slug.
  */
-const VISIBLE_THEME_SLUGS = new Set(["2026-09"]);
+const VISIBLE_THEME_SLUGS = new Set(["2026-11"]);
 
 export const CURRICULUM_MONTHS = ALL_CURRICULUM_MONTHS.filter((m) =>
   VISIBLE_THEME_SLUGS.has(m.slug),
 );
+
+/** 1-based theme number in the full year plan (Career = 03). */
+export function themePlanNumber(month: CurriculumMonthTheme): number {
+  const idx = ALL_CURRICULUM_MONTHS.findIndex((m) => m.slug === month.slug);
+  return idx >= 0 ? idx + 1 : 1;
+}
 
 const VI_MONTHS = [
   "Tháng 1",
@@ -67,6 +81,23 @@ export function getCurriculumMonth(slug: string): CurriculumMonthTheme | undefin
   return CURRICULUM_MONTHS.find((m) => m.slug === slug);
 }
 
+export function themeHasAgeBands(
+  month: CurriculumMonthTheme,
+): month is CurriculumMonthTheme & { ageBands: CurriculumAgeBand[] } {
+  return Array.isArray(month.ageBands) && month.ageBands.length > 0;
+}
+
+export function getCurriculumAgeBand(
+  slug: string,
+  ageId: string,
+): { month: CurriculumMonthTheme; ageBand: CurriculumAgeBand } | undefined {
+  const month = getCurriculumMonth(slug);
+  if (!month?.ageBands?.length) return undefined;
+  const ageBand = month.ageBands.find((b) => b.id === ageId);
+  if (!ageBand) return undefined;
+  return { month, ageBand };
+}
+
 export function getCurriculumWeek(
   slug: string,
   weekIndex: number,
@@ -76,6 +107,24 @@ export function getCurriculumWeek(
   const week = month.weeks.find((w) => w.weekIndex === weekIndex);
   if (!week) return undefined;
   return { month, week };
+}
+
+export function getCurriculumAgeWeek(
+  slug: string,
+  ageId: string,
+  weekIndex: number,
+):
+  | {
+      month: CurriculumMonthTheme;
+      ageBand: CurriculumAgeBand;
+      week: CurriculumWeekTheme;
+    }
+  | undefined {
+  const resolved = getCurriculumAgeBand(slug, ageId);
+  if (!resolved) return undefined;
+  const week = resolved.ageBand.weeks.find((w) => w.weekIndex === weekIndex);
+  if (!week) return undefined;
+  return { month: resolved.month, ageBand: resolved.ageBand, week };
 }
 
 export function formatMonthLabel(month: number, year: number): string {
@@ -92,11 +141,22 @@ export function themeDisplayNameVi(month: CurriculumMonthTheme): string {
   return (month.titleVi || month.titleEn).trim();
 }
 
-export const DEFAULT_THEME_SLUG = CURRICULUM_MONTHS[0]?.slug ?? "2026-09";
+export function ageBandDisplayName(ageBand: CurriculumAgeBand): string {
+  return (ageBand.labelVi || ageBand.labelEn).trim();
+}
+
+export const DEFAULT_THEME_SLUG = CURRICULUM_MONTHS[0]?.slug ?? "2026-11";
 
 export function monthAccent(index: number) {
   return MONTH_CARD_ACCENTS[index % MONTH_CARD_ACCENTS.length];
 }
+
+/** Map curriculum labels → approved asset stems when names differ. */
+const WORD_STEM_ALIASES: Record<string, string> = {
+  firefighter: "fireman",
+  // police-officer.png is a mislabeled pilot asset; use police.png instead.
+  "police-officer": "police",
+};
 
 function wordFileStem(word: string): string {
   // Drop teacher-only notes so asset slugs stay clean (e.g. "sydney opera house chỉ dành cho…").
@@ -106,7 +166,8 @@ function wordFileStem(word: string): string {
     .replace(/\s+chỉ\s+dành\s+cho\b.*$/u, "")
     .replace(/\s+\d+\s*-\s*\d+\s*yo\b.*$/u, "")
     .trim();
-  return cleaned.replace(/\s+/g, "-");
+  const stem = cleaned.replace(/\s+/g, "-");
+  return WORD_STEM_ALIASES[stem] ?? stem;
 }
 
 function displayWord(word: string): string {
@@ -133,19 +194,26 @@ function buildWordItems(words: string[]): WordItem[] {
 export function buildWeekUnitConfig(
   month: CurriculumMonthTheme,
   week: CurriculumWeekTheme,
+  ageBand?: CurriculumAgeBand,
 ): UnitGameConfig {
   const words = buildWordItems(week.words);
   const topic = themeDisplayName(month);
-  const title = `${topic} · Tuần ${week.weekIndex}`;
+  const ageLabel = ageBand ? ageBandDisplayName(ageBand) : null;
+  const title = ageLabel
+    ? `${topic} · ${ageLabel} · Tuần ${week.weekIndex}`
+    : `${topic} · Tuần ${week.weekIndex}`;
   const pairs = words.map((w) => ({
     left: w.text,
     right: w.meaning || w.text,
   }));
+  const slug = ageBand
+    ? `${month.slug}-${ageBand.id}-w${week.weekIndex}`
+    : `${month.slug}-w${week.weekIndex}`;
 
   return {
-    slug: `${month.slug}-w${week.weekIndex}`,
+    slug,
     name: title,
-    unit: `Week ${week.weekIndex}`,
+    unit: ageLabel ? `${ageLabel} · Week ${week.weekIndex}` : `Week ${week.weekIndex}`,
     bookname: topic,
     flashcards: { title: `Flashcards · ${title}`, words, autoAudio: true },
     matching: { title: `Matching · ${title}`, pairs, showScore: true },
@@ -155,7 +223,11 @@ export function buildWeekUnitConfig(
     parts: [
       {
         id: "week",
-        title: week.isReview ? `Ôn tập · Tuần ${week.weekIndex}` : `Tuần ${week.weekIndex}`,
+        title: week.isReview
+          ? `Ôn tập · Tuần ${week.weekIndex}`
+          : ageLabel
+            ? `${ageLabel} · Tuần ${week.weekIndex}`
+            : `Tuần ${week.weekIndex}`,
         words,
         enabledGames: DEFAULT_ENABLED_GAMES,
       },

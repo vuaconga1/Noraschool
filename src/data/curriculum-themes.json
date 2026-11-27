@@ -158,76 +158,267 @@
     "month": 11,
     "titleVi": "Nghề nghiệp",
     "titleEn": "Career",
-    "topicPlan": "2 weeks: jobs part 1\n2 weeks: jobs part 2+ workplaces",
-    "weeks": [
+    "topicPlan": "Age bands × weeks: actions (w1–2) + jobs (w3–4)",
+    "weeks": [],
+    "ageBands": [
       {
-        "weekIndex": 1,
-        "label": "Jobs: doctor, teacher, pilot, vet, cook, police, fireman, ",
-        "isReview": false,
-        "words": [
-          "doctor",
-          "teacher",
-          "pilot",
-          "vet",
-          "cook",
-          "police",
-          "fireman",
-          "scientist 5-6yo",
-          "astronaut 5-6yo",
-          "farmer",
-          "driver"
+        "id": "1.5-3",
+        "labelVi": "1.5–3 tuổi",
+        "labelEn": "Ages 1.5–3",
+        "weeks": [
+          {
+            "weekIndex": 1,
+            "label": "Actions: eat, drink, sleep, cook, fly, drive",
+            "isReview": false,
+            "words": [
+              "eat",
+              "drink",
+              "sleep",
+              "cook",
+              "fly",
+              "drive"
+            ]
+          },
+          {
+            "weekIndex": 2,
+            "label": "Actions: eat, drink, sleep, cook, fly, drive",
+            "isReview": false,
+            "words": [
+              "eat",
+              "drink",
+              "sleep",
+              "cook",
+              "fly",
+              "drive"
+            ]
+          },
+          {
+            "weekIndex": 3,
+            "label": "Jobs: teacher, doctor, pilot, dentist",
+            "isReview": false,
+            "words": [
+              "teacher",
+              "doctor",
+              "pilot",
+              "dentist"
+            ]
+          },
+          {
+            "weekIndex": 4,
+            "label": "Jobs: teacher, doctor, pilot, dentist",
+            "isReview": false,
+            "words": [
+              "teacher",
+              "doctor",
+              "pilot",
+              "dentist"
+            ]
+          }
         ]
       },
       {
-        "weekIndex": 2,
-        "label": "Review:  doctor, teacher, pilot, vet, cook, police, fireman, ",
-        "isReview": true,
-        "words": [
-          "doctor",
-          "teacher",
-          "pilot",
-          "vet",
-          "cook",
-          "police",
-          "fireman",
-          "scientist 5-6yo",
-          "astronaut 5-6yo",
-          "farmer",
-          "driver"
+        "id": "3-4",
+        "labelVi": "3–4 tuổi",
+        "labelEn": "Ages 3–4",
+        "weeks": [
+          {
+            "weekIndex": 1,
+            "label": "Actions: wash, eat, drink, sleep, cook, fly, drive",
+            "isReview": false,
+            "words": [
+              "wash",
+              "eat",
+              "drink",
+              "sleep",
+              "cook",
+              "fly",
+              "drive"
+            ]
+          },
+          {
+            "weekIndex": 2,
+            "label": "Actions: wash, eat, drink, sleep, cook, fly, drive",
+            "isReview": false,
+            "words": [
+              "wash",
+              "eat",
+              "drink",
+              "sleep",
+              "cook",
+              "fly",
+              "drive"
+            ]
+          },
+          {
+            "weekIndex": 3,
+            "label": "Jobs: teacher, doctor, nurse, police officer, pilot, dentist",
+            "isReview": false,
+            "words": [
+              "teacher",
+              "doctor",
+              "nurse",
+              "police officer",
+              "pilot",
+              "dentist"
+            ]
+          },
+          {
+            "weekIndex": 4,
+            "label": "Jobs: teacher, doctor, nurse, police officer, pilot, dentist",
+            "isReview": false,
+            "words": [
+              "teacher",
+              "doctor",
+              "nurse",
+              "police officer",
+              "pilot",
+              "dentist"
+            ]
+          }
         ]
       },
       {
-        "weekIndex": 3,
-        "label": "brush⁠, ⁠cook⁠, ⁠fly⁠, ⁠drive⁠, ⁠wash⁠, ⁠eat⁠, ⁠drink⁠, ⁠sleep⁠, ⁠walk⁠, ⁠run",
-        "isReview": false,
-        "words": [
-          "brush",
-          "cook",
-          "fly",
-          "drive",
-          "wash",
-          "eat",
-          "drink",
-          "sleep",
-          "walk",
-          "run"
+        "id": "4-5",
+        "labelVi": "4–5 tuổi",
+        "labelEn": "Ages 4–5",
+        "weeks": [
+          {
+            "weekIndex": 1,
+            "label": "Actions: brush, wash, eat, drink, sleep, cook, fly, drive, walk",
+            "isReview": false,
+            "words": [
+              "brush",
+              "wash",
+              "eat",
+              "drink",
+              "sleep",
+              "cook",
+              "fly",
+              "drive",
+              "walk"
+            ]
+          },
+          {
+            "weekIndex": 2,
+            "label": "Actions: brush, wash, eat, drink, sleep, cook, fly, drive, walk",
+            "isReview": false,
+            "words": [
+              "brush",
+              "wash",
+              "eat",
+              "drink",
+              "sleep",
+              "cook",
+              "fly",
+              "drive",
+              "walk"
+            ]
+          },
+          {
+            "weekIndex": 3,
+            "label": "Jobs: teacher, doctor, nurse, police officer, firefighter, driver, pilot, dentist",
+            "isReview": false,
+            "words": [
+              "teacher",
+              "doctor",
+              "nurse",
+              "police officer",
+              "firefighter",
+              "driver",
+              "pilot",
+              "dentist"
+            ]
+          },
+          {
+            "weekIndex": 4,
+            "label": "Jobs: teacher, doctor, nurse, police officer, firefighter, driver, pilot, dentist",
+            "isReview": false,
+            "words": [
+              "teacher",
+              "doctor",
+              "nurse",
+              "police officer",
+              "firefighter",
+              "driver",
+              "pilot",
+              "dentist"
+            ]
+          }
         ]
       },
       {
-        "weekIndex": 4,
-        "label": "brush⁠, ⁠cook⁠, ⁠fly⁠, ⁠drive⁠, ⁠wash⁠, ⁠eat⁠, ⁠drink⁠, ⁠sleep⁠, ⁠walk⁠, ⁠run",
-        "isReview": false,
-        "words": [
-          "brush",
-          "cook",
-          "fly",
-          "drive",
-          "wash",
-          "eat",
-          "drink",
-          "sleep",
-          "walk",
-          "run"
+        "id": "5-6",
+        "labelVi": "5–6 tuổi",
+        "labelEn": "Ages 5–6",
+        "weeks": [
+          {
+            "weekIndex": 1,
+            "label": "Actions: brush, wash, eat, drink, sleep, cook, fly, drive, walk, run",
+            "isReview": false,
+            "words": [
+              "brush",
+              "wash",
+              "eat",
+              "drink",
+              "sleep",
+              "cook",
+              "fly",
+              "drive",
+              "walk",
+              "run"
+            ]
+          },
+          {
+            "weekIndex": 2,
+            "label": "Actions: brush, wash, eat, drink, sleep, cook, fly, drive, walk, run",
+            "isReview": false,
+            "words": [
+              "brush",
+              "wash",
+              "eat",
+              "drink",
+              "sleep",
+              "cook",
+              "fly",
+              "drive",
+              "walk",
+              "run"
+            ]
+          },
+          {
+            "weekIndex": 3,
+            "label": "Jobs: teacher, doctor, nurse, police officer, firefighter, student, waiter, driver, pilot, dentist",
+            "isReview": false,
+            "words": [
+              "teacher",
+              "doctor",
+              "nurse",
+              "police officer",
+              "firefighter",
+              "student",
+              "waiter",
+              "driver",
+              "pilot",
+              "dentist"
+            ]
+          },
+          {
+            "weekIndex": 4,
+            "label": "Jobs: teacher, doctor, nurse, police officer, firefighter, student, waiter, driver, pilot, dentist",
+            "isReview": false,
+            "words": [
+              "teacher",
+              "doctor",
+              "nurse",
+              "police officer",
+              "firefighter",
+              "student",
+              "waiter",
+              "driver",
+              "pilot",
+              "dentist"
+            ]
+          }
         ]
       }
     ]

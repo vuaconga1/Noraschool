@@ -10,7 +10,9 @@ import { GameBackButton } from "@/app/components/games/GameBackButton";
 import { MascotGuide } from "@/app/components/games/MascotGuide";
 import { DEFAULT_ENABLED_GAMES } from "@/types/games";
 import {
+  ageBandDisplayName,
   themeDisplayName,
+  type CurriculumAgeBand,
   type CurriculumMonthTheme,
   type CurriculumWeekTheme,
 } from "@/lib/curriculum-themes";
@@ -22,6 +24,7 @@ const TOPIC_CARD_BG = {
 
 type Props = {
   month: CurriculumMonthTheme;
+  ageBand?: CurriculumAgeBand;
   onOpenSidebar?: () => void;
 };
 
@@ -36,10 +39,11 @@ function weekTitle(week: CurriculumWeekTheme): string {
   return `Tuần ${week.weekIndex}`;
 }
 
-export function ThemeWeekCards({ month, onOpenSidebar }: Props) {
+export function ThemeWeekCards({ month, ageBand, onOpenSidebar }: Props) {
   const router = useRouter();
-  const weeks = month.weeks;
+  const weeks = ageBand?.weeks ?? month.weeks;
   const heading = themeDisplayName(month);
+  const ageLabel = ageBand ? ageBandDisplayName(ageBand) : null;
   const forest = useForestThemeContextOptional();
   const isNoraTheme = (forest?.theme ?? "wewin") === "wewin";
   const cardBgUrl = isNoraTheme ? TOPIC_CARD_BG.nora : TOPIC_CARD_BG.classic;
@@ -50,7 +54,7 @@ export function ThemeWeekCards({ month, onOpenSidebar }: Props) {
 
   useEffect(() => {
     setActiveIndex(0);
-  }, [month.slug]);
+  }, [month.slug, ageBand?.id]);
 
   useEffect(() => {
     const updateLayout = () => {
@@ -105,9 +109,15 @@ export function ThemeWeekCards({ month, onOpenSidebar }: Props) {
 
   const openWeek = useCallback(
     (weekIndex: number) => {
+      if (ageBand) {
+        router.push(
+          `/games/themes/${month.slug}/age/${encodeURIComponent(ageBand.id)}/week/${weekIndex}`,
+        );
+        return;
+      }
       router.push(`/games/themes/${month.slug}/week/${weekIndex}`);
     },
-    [month.slug, router],
+    [ageBand, month.slug, router],
   );
 
   const selectCard = useCallback(
@@ -255,9 +265,15 @@ export function ThemeWeekCards({ month, onOpenSidebar }: Props) {
     <div className="flex min-h-0 flex-1 flex-col bg-transparent">
       {/* Breadcrumb — desktop only (same style as week game page) */}
       <div className="relative hidden min-h-[52px] items-center justify-center gap-4 px-6 pt-2 pb-2 md:flex">
-        {onOpenSidebar && (
+        {(onOpenSidebar || ageBand) && (
           <GameBackButton
-            onClick={onOpenSidebar}
+            onClick={() => {
+              if (ageBand) {
+                router.push(`/games/themes/${month.slug}`);
+                return;
+              }
+              onOpenSidebar?.();
+            }}
             className="absolute left-6 top-2 z-20"
           />
         )}
@@ -282,9 +298,26 @@ export function ThemeWeekCards({ month, onOpenSidebar }: Props) {
             </span>
           )}
           <span className="text-gray-400">/</span>
-          <span className="text-sm font-semibold text-[#BE185D] sm:text-base">
-            {heading}
-          </span>
+          {ageLabel ? (
+            <>
+              <button
+                type="button"
+                onClick={() => router.push(`/games/themes/${month.slug}`)}
+                className="text-sm font-semibold text-[#DB2777] transition-colors
+                           hover:text-[#BE185D] sm:text-base"
+              >
+                {heading}
+              </button>
+              <span className="text-gray-400">/</span>
+              <span className="text-sm font-semibold text-[#BE185D] sm:text-base">
+                {ageLabel}
+              </span>
+            </>
+          ) : (
+            <span className="text-sm font-semibold text-[#BE185D] sm:text-base">
+              {heading}
+            </span>
+          )}
         </nav>
       </div>
 
@@ -296,7 +329,7 @@ export function ThemeWeekCards({ month, onOpenSidebar }: Props) {
               className="mb-1 hidden text-3xl font-bold drop-shadow-lg sm:text-4xl md:block lg:text-5xl"
               style={{ textShadow: "0 12px 25px rgba(0,0,0,0.3)", color: headingColor }}
             >
-              {heading}
+              {ageLabel ? `${heading} · ${ageLabel}` : heading}
             </h1>
             <p className="text-base font-medium text-black sm:text-2xl md:text-3xl">
               Choose week to play game
@@ -309,8 +342,8 @@ export function ThemeWeekCards({ month, onOpenSidebar }: Props) {
             title={`📜 Bản đồ nhiệm vụ: ${weekTitle(activeWeek)}`}
             message={
               isLargeScreen
-                ? `Chủ đề “${heading}” có ${weeks.length} tuần · chọn thẻ tuần để bắt đầu ${gameCount} thử thách nhé!`
-                : `Chủ đề “${heading}” có ${activeWeek.words.length} từ vựng tuần này và ${gameCount} thử thách. Vuốt hoặc bấm mũi tên để xem tuần khác, rồi bấm PLAY NOW nhé!`
+                ? `${ageLabel ? `Nhóm ${ageLabel}` : `Chủ đề “${heading}”`} có ${weeks.length} tuần · chọn thẻ tuần để bắt đầu ${gameCount} thử thách nhé!`
+                : `${ageLabel ? `Nhóm ${ageLabel}` : `Chủ đề “${heading}”`} có ${activeWeek.words.length} từ vựng tuần này và ${gameCount} thử thách. Vuốt hoặc bấm mũi tên để xem tuần khác, rồi bấm PLAY NOW nhé!`
             }
             className="!mt-2 !mb-2 mx-auto w-full max-w-3xl"
           />

@@ -14,6 +14,7 @@ import { CherryBlossomDecor } from "@/app/components/games/CherryBlossomDecor";
 import {
   CURRICULUM_MONTHS,
   themeDisplayName,
+  themePlanNumber,
 } from "@/lib/curriculum-themes";
 import { NORA_SHELL } from "@/lib/brand";
 
@@ -176,10 +177,13 @@ export function ThemeTopicsSidebar({
                 </div>
 
                 <nav className="relative z-10 flex-1 space-y-2 overflow-y-auto p-3">
-                  {CURRICULUM_MONTHS.map((month, idx) => {
+                  {CURRICULUM_MONTHS.map((month) => {
                     const href = `/games/themes/${month.slug}`;
                     const active = isActive(month.slug);
                     const name = themeDisplayName(month);
+                    const planNo = themePlanNumber(month)
+                      .toString()
+                      .padStart(2, "0");
 
                     return (
                       <Link
@@ -205,7 +209,7 @@ export function ThemeTopicsSidebar({
                             active ? theme.iconBoxActiveBg : theme.iconBoxBg
                           }`}
                         >
-                          {(idx + 1).toString().padStart(2, "0")}
+                          {planNo}
                         </div>
                         <span
                           className={`min-w-0 flex-1 text-[14px] font-bold uppercase line-clamp-2 ${
